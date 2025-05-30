@@ -1,4 +1,4 @@
-// Gestion des inscriptions multiples et correction de l'envoi des données
+// Modification du script config.js pour ajouter un message de confirmation après envoi
 document.addEventListener('DOMContentLoaded', function() {
     // Charger la configuration
     let config = localStorage.getItem('formConfig');
@@ -230,14 +230,22 @@ document.addEventListener('DOMContentLoaded', function() {
         // Convertir les données en format JSON pour l'envoi
         const jsonData = JSON.stringify(famille);
         
+        // Afficher un message de chargement
+        const formContent = this.innerHTML;
+        this.innerHTML = `
+            <div class="text-center p-4">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Chargement...</span>
+                </div>
+                <p class="mt-3">Envoi en cours, veuillez patienter...</p>
+            </div>
+        `;
+        
         // Créer un élément caché pour stocker les données JSON
         const hiddenInput = document.createElement('input');
         hiddenInput.type = 'hidden';
         hiddenInput.name = 'famille_data';
         hiddenInput.value = jsonData;
-        
-        // Ajouter l'élément au formulaire
-        this.appendChild(hiddenInput);
         
         // Créer un élément pour le nombre de membres
         const membreCountInput = document.createElement('input');
@@ -245,11 +253,118 @@ document.addEventListener('DOMContentLoaded', function() {
         membreCountInput.name = 'nombre_membres';
         membreCountInput.value = famille.membres.length;
         
-        // Ajouter l'élément au formulaire
-        this.appendChild(membreCountInput);
+        // Créer un formulaire temporaire pour l'envoi
+        const tempForm = document.createElement('form');
+        tempForm.method = 'POST';
+        tempForm.action = 'https://formspree.io/f/xgegvdwj';
+        tempForm.style.display = 'none';
+        tempForm.appendChild(hiddenInput);
+        tempForm.appendChild(membreCountInput);
+        document.body.appendChild(tempForm);
         
-        // Soumettre le formulaire normalement (sans AJAX)
-        return true;
+        // Envoyer les données via Formspree
+        fetch('https://formspree.io/f/xgegvdwj', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                famille: famille,
+                nombre_membres: famille.membres.length
+            })
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error('Erreur lors de l\'envoi du formulaire');
+        })
+        .then(data => {
+            // Afficher un message de confirmation
+            const formElement = document.getElementById('inscriptionForm');
+            formElement.innerHTML = `
+                <div class="alert alert-success text-center">
+                    <h4 class="alert-heading"><i class="bi bi-check-circle-fill"></i> Merci pour votre inscription !</h4>
+                    <p>Votre demande d'inscription au ${config.clubName} a bien été enregistrée.</p>
+                    <p>Un email de confirmation a été envoyé à l'adresse : <strong>${famille.email}</strong></p>
+                    <p>Le responsable du club va traiter votre demande et vous contactera prochainement.</p>
+                    <hr>
+                    <p class="mb-0">
+                        <button type="button" class="btn btn-outline-success mt-3" onclick="window.location.reload()">
+                            Faire une nouvelle inscription
+                        </button>
+                    </p>
+                </div>
+            `;
+            
+            // Préparation des données pour Excel
+            let csvData = [];
+            let headers = ['membre', 'civilite', 'nom', 'prenom', 'date_naissance', 'niveau', 'licence', 'classement', 'competition', 'type_adhesion', 'adresse', 'code_postal', 'ville', 'tel_mobile', 'tel_fixe', 'email', 'commentaires', 'certificat_medical', 'reglement'];
+            csvData.push(headers);
+            
+            // Ajouter une ligne pour chaque membre
+            famille.membres.forEach((membre, index) => {
+                let row = [
+                    `Membre ${index + 1}`,
+                    membre.civilite,
+                    membre.nom,
+                    membre.prenom,
+                    membre.date_naissance,
+                    membre.niveau,
+                    membre.licence,
+                    membre.classement,
+                    membre.competition,
+                    membre.type_adhesion,
+                    famille.adresse,
+                    famille.code_postal,
+                    famille.ville,
+                    famille.tel_mobile,
+                    famille.tel_fixe,
+                    famille.email,
+                    famille.commentaires,
+                    famille.certificat_medical ? 'Oui' : 'Non',
+                    famille.reglement ? 'Oui' : 'Non'
+                ];
+                csvData.push(row);
+            });
+            
+            // Génération du CSV
+            const csvContent = csvData.map(row => row.join(',')).join('\n');
+            
+            // Envoi du CSV par email
+            fetch('https://formspree.io/f/xgegvdwj', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    csv: csvContent,
+                    formId: 'tennis-club-pimprez-csv',
+                    subject: `Données CSV - Nouvelle inscription au ${config.clubName}`
+                })
+            });
+        })
+        .catch(error => {
+            console.error('Erreur:', error);
+            const formElement = document.getElementById('inscriptionForm');
+            formElement.innerHTML = `
+                <div class="alert alert-danger text-center">
+                    <h4 class="alert-heading"><i class="bi bi-exclamation-triangle-fill"></i> Erreur</h4>
+                    <p>Une erreur est survenue lors de l'envoi du formulaire.</p>
+                    <p>Veuillez réessayer ultérieurement ou contacter le responsable du club.</p>
+                    <hr>
+                    <p class="mb-0">
+                        <button type="button" class="btn btn-outline-danger mt-3" onclick="window.location.reload()">
+                            Réessayer
+                        </button>
+                    </p>
+                </div>
+            `;
+        });
+        
+        return false;
     });
     
     // Appliquer la configuration au formulaire
