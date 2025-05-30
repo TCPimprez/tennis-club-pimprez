@@ -384,6 +384,37 @@ document.addEventListener('DOMContentLoaded', function() {
                 fieldContainer.style.display = visible ? 'block' : 'none';
             }
         }
+        
+        // Gérer les champs administratifs
+        if (config.admin) {
+            // Certificat médical
+            const certificatContainer = document.getElementById('container-certificat_medical');
+            if (certificatContainer) {
+                certificatContainer.style.display = config.admin.certificat_medical ? 'block' : 'none';
+                
+                // Mettre à jour le texte si disponible
+                if (config.admin.text_certificat_medical) {
+                    const certificatLabel = certificatContainer.querySelector('label');
+                    if (certificatLabel) {
+                        certificatLabel.textContent = config.admin.text_certificat_medical;
+                    }
+                }
+            }
+            
+            // Règlement intérieur
+            const reglementContainer = document.getElementById('container-reglement');
+            if (reglementContainer) {
+                reglementContainer.style.display = config.admin.reglement ? 'block' : 'none';
+                
+                // Mettre à jour le texte si disponible
+                if (config.admin.text_reglement) {
+                    const reglementLabel = reglementContainer.querySelector('label');
+                    if (reglementLabel) {
+                        reglementLabel.textContent = config.admin.text_reglement;
+                    }
+                }
+            }
+        }
     }
     
     // Ajouter un lien vers la page d'administration
