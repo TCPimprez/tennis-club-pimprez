@@ -238,6 +238,38 @@
                 </div>
             </div>
 
+            <h3 class="section-title">Informations administratives</h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="field-item">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="field_certificat_medical" checked>
+                            <label class="form-check-label" for="field_certificat_medical">
+                                Certificat médical
+                            </label>
+                        </div>
+                        <div class="mt-2">
+                            <label for="text_certificat_medical" class="form-label">Texte du certificat médical:</label>
+                            <textarea class="form-control" id="text_certificat_medical" rows="2">Je m'engage à fournir un certificat médical de non contre-indication à la pratique du tennis</textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="field-item">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="field_reglement" checked>
+                            <label class="form-check-label" for="field_reglement">
+                                Règlement intérieur
+                            </label>
+                        </div>
+                        <div class="mt-2">
+                            <label for="text_reglement" class="form-label">Texte du règlement:</label>
+                            <textarea class="form-control" id="text_reglement" rows="2">J'accepte le règlement intérieur du club</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <h3 class="section-title">Personnalisation</h3>
             <div class="row mb-3">
                 <div class="col-md-6">
@@ -294,6 +326,20 @@
                     }
                 }
                 
+                // Appliquer la configuration aux champs administratifs
+                if (config.admin) {
+                    document.getElementById('field_certificat_medical').checked = config.admin.certificat_medical !== false;
+                    document.getElementById('field_reglement').checked = config.admin.reglement !== false;
+                    
+                    if (config.admin.text_certificat_medical) {
+                        document.getElementById('text_certificat_medical').value = config.admin.text_certificat_medical;
+                    }
+                    
+                    if (config.admin.text_reglement) {
+                        document.getElementById('text_reglement').value = config.admin.text_reglement;
+                    }
+                }
+                
                 // Appliquer la personnalisation
                 document.getElementById('club_name').value = config.clubName || 'Tennis Club de Pimprez';
                 document.getElementById('season').value = config.season || '2025-2026';
@@ -305,6 +351,12 @@
             document.getElementById('btn-save').addEventListener('click', function() {
                 const newConfig = {
                     fields: {},
+                    admin: {
+                        certificat_medical: document.getElementById('field_certificat_medical').checked,
+                        reglement: document.getElementById('field_reglement').checked,
+                        text_certificat_medical: document.getElementById('text_certificat_medical').value,
+                        text_reglement: document.getElementById('text_reglement').value
+                    },
                     clubName: document.getElementById('club_name').value,
                     season: document.getElementById('season').value,
                     headerColor: document.getElementById('header_color').value,
@@ -314,7 +366,10 @@
                 // Récupérer l'état de tous les champs
                 document.querySelectorAll('[id^="field_"]').forEach(checkbox => {
                     const fieldName = checkbox.id.replace('field_', '');
-                    newConfig.fields[fieldName] = checkbox.checked;
+                    // Ne pas inclure les champs administratifs dans la section fields
+                    if (fieldName !== 'certificat_medical' && fieldName !== 'reglement') {
+                        newConfig.fields[fieldName] = checkbox.checked;
+                    }
                 });
                 
                 // Sauvegarder dans le localStorage
