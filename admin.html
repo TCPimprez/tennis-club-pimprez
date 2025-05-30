@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administration - Tennis Club de Pimprez</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f5f5f5;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .header-banner {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px 0;
+            margin-bottom: 30px;
+            border-radius: 0 0 10px 10px;
+        }
+        .admin-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        .section-title {
+            background-color: #f0f8ff;
+            padding: 10px;
+            margin: 20px 0 15px 0;
+            border-left: 5px solid #4CAF50;
+            font-weight: 600;
+        }
+        .btn-save {
+            background-color: #4CAF50;
+            border: none;
+            padding: 12px 30px;
+            font-size: 18px;
+            font-weight: 600;
+            color: white;
+        }
+        .btn-save:hover {
+            background-color: #45a049;
+        }
+        .form-footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+        }
+        .tennis-icon {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+        .field-item {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        .field-item:hover {
+            background-color: #f9f9f9;
+        }
+        .color-picker {
+            width: 100%;
+            height: 40px;
+            padding: 0;
+            border: 1px solid #ced4da;
+            border-radius: 0.25rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-banner text-center">
+            <h1>
+                <svg class="tennis-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                    <circle cx="256" cy="256" r="240" fill="#f0e913" stroke="#000" stroke-width="10"/>
+                    <path d="M256 16c132.5 0 240 107.5 240 240S388.5 496 256 496 16 388.5 16 256 123.5 16 256 16" fill="none" stroke="#fff" stroke-width="20" stroke-dasharray="40"/>
+                </svg>
+                Administration - Tennis Club de Pimprez
+            </h1>
+            <p class="lead">Personnalisation du formulaire d'inscription</p>
+        </div>
+
+        <div class="admin-container">
+            <div class="alert alert-info">
+                Activez ou désactivez les champs du formulaire en cochant les cases correspondantes. Cliquez sur "Enregistrer" pour appliquer vos modifications.
+            </div>
+
+            <h3 class="section-title">Informations personnelles</h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="field-item">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="field_civilite" checked>
+                            <label class="form-check-label" for="field_civilite">
+                                Civilité (M./Mme/Autre)
+                            </label>
+                        </div>
+                    </div>
+                    <div class="field-item">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="field_nom" checked>
+                            <label class="form-check-label" for="field_nom">
+                                Nom
+                            </label>
+                            <div class="form-text">Ce champ est obligatoire et ne peut pas être désactivé</div>
+                        </div>
+                    </div>
+                    <div class="field-item">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="field_prenom" checked>
+                            <label class="form-check-label" for="field_prenom">
+                                Prénom
+                            </label>
+                            <div class="form-text">Ce champ est obligatoire et ne peut pas être désactivé</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="field-item">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="field_date_naissance" checked>
+                            <label class="form-check-label" for="field_date_naissance">
+                                Date de naissance
+                            </label>
+                        </div>
+                    </div>
+                    <div class="field-item">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="field_nationalite">
+                            <label class="form-check-label" for="field_nationalite">
+                                Nationalité
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="section-title">Informations sportives</h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="field-item">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="field_niveau" checked>
+                            <label class="form-check-label" for="field_niveau">
+                                Niveau de tennis
+                            </label>
+                        </div>
+                    </div>
+                    <div class="field-item">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="field_licence">
+                            <label class="form-check-label" for="field_licence">
+                                Numéro de licence FFT
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="field-item">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="field_classement">
+                            <label class="form-check-label" for="field_classement">
+                                Classement
+                            </label>
+                        </div>
+                    </div>
+                    <div class="field-item">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="field_competition" checked>
+                            <label class="form-check-label" for="field_competition">
+                                Participation aux compétitions
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="section-title">Coordonnées</h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="field-item">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="field_adresse" checked>
+                            <label class="form-check-label" for="field_adresse">
+                                Adresse
+                            </label>
+                        </div>
+                    </div>
+                    <div class="field-item">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="field_code_postal" checked>
+                            <label class="form-check-label" for="field_code_postal">
+                                Code postal
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="field-item">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="field_ville" checked>
+                            <label class="form-check-label" for="field_ville">
+                                Ville
+                            </label>
+                        </div>
+                    </div>
+                    <div class="field-item">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="field_tel_mobile" checked>
+                            <label class="form-check-label" for="field_tel_mobile">
+                                Téléphone mobile
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="field-item">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="field_tel_fixe">
+                            <label class="form-check-label" for="field_tel_fixe">
+                                Téléphone fixe
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="field-item">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="field_email" checked>
+                            <label class="form-check-label" for="field_email">
+                                Email
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="section-title">Personnalisation</h3>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="club_name" class="form-label">Nom du club</label>
+                    <input type="text" class="form-control" id="club_name" value="Tennis Club de Pimprez">
+                </div>
+                <div class="col-md-6">
+                    <label for="season" class="form-label">Saison</label>
+                    <input type="text" class="form-control" id="season" value="2025-2026">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="header_color" class="form-label">Couleur de l'en-tête</label>
+                    <input type="color" class="color-picker" id="header_color" value="#4CAF50">
+                </div>
+                <div class="col-md-6">
+                    <label for="button_color" class="form-label">Couleur des boutons</label>
+                    <input type="color" class="color-picker" id="button_color" value="#4CAF50">
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-md-12 text-center">
+                    <button type="button" id="btn-save" class="btn btn-save">Enregistrer les modifications</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-footer">
+            <p>Tennis Club de Pimprez - Tous droits réservés</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Charger la configuration existante
+            let config = localStorage.getItem('formConfig');
+            if (config) {
+                config = JSON.parse(config);
+                
+                // Appliquer la configuration aux champs
+                for (const [key, value] of Object.entries(config.fields)) {
+                    const checkbox = document.getElementById('field_' + key);
+                    if (checkbox) {
+                        checkbox.checked = value;
+                        
+                        // Désactiver les champs obligatoires
+                        if (key === 'nom' || key === 'prenom') {
+                            checkbox.disabled = true;
+                        }
+                    }
+                }
+                
+                // Appliquer la personnalisation
+                document.getElementById('club_name').value = config.clubName || 'Tennis Club de Pimprez';
+                document.getElementById('season').value = config.season || '2025-2026';
+                document.getElementById('header_color').value = config.headerColor || '#4CAF50';
+                document.getElementById('button_color').value = config.buttonColor || '#4CAF50';
+            }
+            
+            // Enregistrer la configuration
+            document.getElementById('btn-save').addEventListener('click', function() {
+                const newConfig = {
+                    fields: {},
+                    clubName: document.getElementById('club_name').value,
+                    season: document.getElementById('season').value,
+                    headerColor: document.getElementById('header_color').value,
+                    buttonColor: document.getElementById('button_color').value
+                };
+                
+                // Récupérer l'état de tous les champs
+                document.querySelectorAll('[id^="field_"]').forEach(checkbox => {
+                    const fieldName = checkbox.id.replace('field_', '');
+                    newConfig.fields[fieldName] = checkbox.checked;
+                });
+                
+                // Sauvegarder dans le localStorage
+                localStorage.setItem('formConfig', JSON.stringify(newConfig));
+                
+                // Afficher un message de confirmation
+                alert('Configuration enregistrée avec succès !');
+                
+                // Rediriger vers le formulaire
+                window.location.href = 'index.html';
+            });
+        });
+    </script>
+</body>
+</html>
