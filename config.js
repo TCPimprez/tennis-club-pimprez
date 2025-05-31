@@ -65,7 +65,8 @@ document.addEventListener('DOMContentLoaded', function() {
     ajouterMembre();
     
     // Gérer l'ajout de membres
-    document.getElementById('btn-add-member').addEventListener('click', function() {
+    document.getElementById('btn-add-member').addEventListener('click', function(e) {
+        e.preventDefault(); // Empêcher le comportement par défaut du bouton
         ajouterMembre();
     });
     
