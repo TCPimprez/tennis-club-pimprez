@@ -6,86 +6,182 @@
     <title>Administration - Tennis Club de Pimprez</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body {
-            background-color: #f5f5f5;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        :root {
+            --header-color: #4CAF50;
         }
-        .header-banner {
-            background-color: #4CAF50;
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        .header {
+            background-color: var(--header-color);
             color: white;
             padding: 20px 0;
-            margin-bottom: 30px;
-            border-radius: 0 0 10px 10px;
-        }
-        .admin-container {
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-            padding: 30px;
-            margin-bottom: 30px;
-        }
-        .section-title {
-            background-color: #f0f8ff;
-            padding: 10px;
-            margin: 20px 0 15px 0;
-            border-left: 5px solid #4CAF50;
-            font-weight: 600;
-        }
-        .btn-save {
-            background-color: #4CAF50;
-            border: none;
-            padding: 12px 30px;
-            font-size: 18px;
-            font-weight: 600;
-            color: white;
-        }
-        .btn-save:hover {
-            background-color: #45a049;
-        }
-        .form-footer {
             text-align: center;
-            margin-top: 20px;
-            color: #666;
+            margin-bottom: 30px;
         }
-        .tennis-icon {
-            width: 40px;
-            height: 40px;
-            margin-right: 10px;
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
         }
+        
+        .header p {
+            font-size: 1.2rem;
+            margin: 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            color: var(--header-color);
+            border-left: 4px solid var(--header-color);
+            padding-left: 10px;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+        
         .field-item {
-            padding: 10px;
-            border-bottom: 1px solid #eee;
-        }
-        .field-item:hover {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 5px;
             background-color: #f9f9f9;
         }
+        
+        .form-check-label {
+            font-weight: 500;
+        }
+        
         .color-picker {
             width: 100%;
             height: 40px;
-            padding: 0;
+            padding: 5px;
             border: 1px solid #ced4da;
-            border-radius: 0.25rem;
+            border-radius: 4px;
+        }
+        
+        .btn-save {
+            background-color: var(--header-color);
+            color: white;
+            padding: 10px 30px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-save:hover {
+            background-color: #3d8b40;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px 0;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* Style pour la fenêtre modale de connexion */
+        .login-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .login-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 5px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .login-title {
+            color: var(--header-color);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .login-btn {
+            background-color: var(--header-color);
+            color: white;
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+        
+        .login-btn:hover {
+            background-color: #3d8b40;
+        }
+        
+        /* Style pour le lien de partage */
+        .share-link-container {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f0f8ff;
+            border-radius: 5px;
+            border: 1px solid #b8daff;
+        }
+        
+        .share-link-input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+        }
+        
+        .copy-btn {
+            background-color: #007bff;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .copy-btn:hover {
+            background-color: #0069d9;
         }
     </style>
 </head>
 <body>
+    <div class="header">
+        <img src="https://cdn-icons-png.flaticon.com/512/2158/2158416.png" alt="Tennis" width="60" height="60">
+        <h1>Administration - Tennis Club de Pimprez</h1>
+        <p>Personnalisation du formulaire d'inscription</p>
+    </div>
+    
     <div class="container">
-        <div class="header-banner text-center">
-            <h1>
-                <svg class="tennis-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                    <circle cx="256" cy="256" r="240" fill="#f0e913" stroke="#000" stroke-width="10"/>
-                    <path d="M256 16c132.5 0 240 107.5 240 240S388.5 496 256 496 16 388.5 16 256 123.5 16 256 16" fill="none" stroke="#fff" stroke-width="20" stroke-dasharray="40"/>
-                </svg>
-                Administration - Tennis Club de Pimprez
-            </h1>
-            <p class="lead">Personnalisation du formulaire d'inscription</p>
+        <div class="alert alert-info">
+            Activez ou désactivez les champs du formulaire en cochant les cases correspondantes. Cliquez sur "Enregistrer" pour appliquer vos modifications.
         </div>
-
-        <div class="admin-container">
-            <div class="alert alert-info">
-                Activez ou désactivez les champs du formulaire en cochant les cases correspondantes. Cliquez sur "Enregistrer" pour appliquer vos modifications.
-            </div>
-
+        
+        <div id="admin-panel" style="display: none;">
             <h3 class="section-title">Informations personnelles</h3>
             <div class="row">
                 <div class="col-md-6">
@@ -95,24 +191,6 @@
                             <label class="form-check-label" for="field_civilite">
                                 Civilité (M./Mme/Autre)
                             </label>
-                        </div>
-                    </div>
-                    <div class="field-item">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="field_nom" checked>
-                            <label class="form-check-label" for="field_nom">
-                                Nom
-                            </label>
-                            <div class="form-text">Ce champ est obligatoire et ne peut pas être désactivé</div>
-                        </div>
-                    </div>
-                    <div class="field-item">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="field_prenom" checked>
-                            <label class="form-check-label" for="field_prenom">
-                                Prénom
-                            </label>
-                            <div class="form-text">Ce champ est obligatoire et ne peut pas être désactivé</div>
                         </div>
                     </div>
                 </div>
@@ -125,9 +203,24 @@
                             </label>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
                     <div class="field-item">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="field_nationalite">
+                            <input class="form-check-input" type="checkbox" id="field_nom" checked>
+                            <label class="form-check-label" for="field_nom">
+                                Nom
+                            </label>
+                        </div>
+                        <p class="text-muted small">Ce champ est obligatoire et ne peut pas être désactivé</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="field-item">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="field_nationalite" checked>
                             <label class="form-check-label" for="field_nationalite">
                                 Nationalité
                             </label>
@@ -135,7 +228,20 @@
                     </div>
                 </div>
             </div>
-
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="field-item">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="field_prenom" checked>
+                            <label class="form-check-label" for="field_prenom">
+                                Prénom
+                            </label>
+                        </div>
+                        <p class="text-muted small">Ce champ est obligatoire et ne peut pas être désactivé</p>
+                    </div>
+                </div>
+            </div>
+            
             <h3 class="section-title">Informations sportives</h3>
             <div class="row">
                 <div class="col-md-6">
@@ -144,14 +250,6 @@
                             <input class="form-check-input" type="checkbox" id="field_niveau" checked>
                             <label class="form-check-label" for="field_niveau">
                                 Niveau de tennis
-                            </label>
-                        </div>
-                    </div>
-                    <div class="field-item">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="field_licence">
-                            <label class="form-check-label" for="field_licence">
-                                Numéro de licence FFT
                             </label>
                         </div>
                     </div>
@@ -165,17 +263,31 @@
                             </label>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
                     <div class="field-item">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="field_competition" checked>
-                            <label class="form-check-label" for="field_competition">
+                            <input class="form-check-input" type="checkbox" id="field_licence_fft">
+                            <label class="form-check-label" for="field_licence_fft">
+                                Numéro de licence FFT
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="field-item">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="field_competitions" checked>
+                            <label class="form-check-label" for="field_competitions">
                                 Participation aux compétitions
                             </label>
                         </div>
                     </div>
                 </div>
             </div>
-
+            
             <h3 class="section-title">Coordonnées</h3>
             <div class="row">
                 <div class="col-md-6">
@@ -184,14 +296,6 @@
                             <input class="form-check-input" type="checkbox" id="field_adresse" checked>
                             <label class="form-check-label" for="field_adresse">
                                 Adresse
-                            </label>
-                        </div>
-                    </div>
-                    <div class="field-item">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="field_code_postal" checked>
-                            <label class="form-check-label" for="field_code_postal">
-                                Code postal
                             </label>
                         </div>
                     </div>
@@ -205,6 +309,20 @@
                             </label>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="field-item">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="field_code_postal" checked>
+                            <label class="form-check-label" for="field_code_postal">
+                                Code postal
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
                     <div class="field-item">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" id="field_tel_mobile" checked>
@@ -297,9 +415,33 @@
                     <button type="button" id="btn-save" class="btn btn-save">Enregistrer les modifications</button>
                 </div>
             </div>
+            
+            <div class="share-link-container mt-4">
+                <h4>Lien de partage avec configuration</h4>
+                <p>Copiez ce lien pour partager le formulaire avec exactement la même configuration :</p>
+                <input type="text" id="share-link" class="share-link-input" readonly>
+                <button id="copy-link-btn" class="copy-btn">Copier le lien</button>
+            </div>
         </div>
-
-        <div class="form-footer">
+        
+        <div id="login-form" class="login-modal">
+            <div class="login-content">
+                <h3 class="login-title">Accès Administration</h3>
+                <p>Veuillez entrer le mot de passe pour accéder au panneau d'administration.</p>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Mot de passe:</label>
+                    <input type="password" class="form-control" id="password">
+                </div>
+                <button type="button" id="login-btn" class="login-btn">Se connecter</button>
+                <div class="text-center mt-3">
+                    <a href="index.html">Retour au formulaire</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <div class="container">
             <p>Tennis Club de Pimprez - Tous droits réservés</p>
         </div>
     </div>
@@ -308,6 +450,27 @@
     <script src="admin_secure.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Vérifier si des paramètres de configuration sont présents dans l'URL
+            const urlParams = new URLSearchParams(window.location.search);
+            let configFromUrl = null;
+            
+            if (urlParams.has('config')) {
+                try {
+                    // Décoder et parser la configuration depuis l'URL
+                    const encodedConfig = urlParams.get('config');
+                    const jsonConfig = atob(encodedConfig);
+                    configFromUrl = JSON.parse(jsonConfig);
+                    
+                    // Sauvegarder cette configuration dans le localStorage
+                    localStorage.setItem('formConfig', JSON.stringify(configFromUrl));
+                    
+                    // Rediriger vers la page sans paramètres pour nettoyer l'URL
+                    window.history.replaceState({}, document.title, 'admin.html');
+                } catch (e) {
+                    console.error("Erreur lors du décodage de la configuration:", e);
+                }
+            }
+            
             // Charger la configuration existante
             let config = localStorage.getItem('formConfig');
             if (config) {
@@ -347,6 +510,9 @@
                 document.getElementById('button_color').value = config.buttonColor || '#4CAF50';
             }
             
+            // Générer le lien de partage avec la configuration actuelle
+            updateShareLink();
+            
             // Enregistrer la configuration
             document.getElementById('btn-save').addEventListener('click', function() {
                 const newConfig = {
@@ -375,11 +541,45 @@
                 // Sauvegarder dans le localStorage
                 localStorage.setItem('formConfig', JSON.stringify(newConfig));
                 
+                // Mettre à jour le lien de partage
+                updateShareLink();
+                
                 // Afficher un message de confirmation
                 alert('Configuration enregistrée avec succès !');
                 
                 // Rediriger vers le formulaire
                 window.location.href = 'index.html';
+            });
+            
+            // Fonction pour mettre à jour le lien de partage
+            function updateShareLink() {
+                const config = localStorage.getItem('formConfig');
+                if (config) {
+                    // Encoder la configuration en base64
+                    const encodedConfig = btoa(config);
+                    
+                    // Créer l'URL avec la configuration
+                    const baseUrl = window.location.href.split('?')[0].replace('admin.html', 'index.html');
+                    const shareUrl = `${baseUrl}?config=${encodedConfig}`;
+                    
+                    // Mettre à jour le champ de texte
+                    document.getElementById('share-link').value = shareUrl;
+                }
+            }
+            
+            // Gérer le bouton de copie du lien
+            document.getElementById('copy-link-btn').addEventListener('click', function() {
+                const shareLink = document.getElementById('share-link');
+                shareLink.select();
+                document.execCommand('copy');
+                
+                // Changer temporairement le texte du bouton
+                const copyBtn = this;
+                const originalText = copyBtn.textContent;
+                copyBtn.textContent = 'Copié !';
+                setTimeout(() => {
+                    copyBtn.textContent = originalText;
+                }, 2000);
             });
         });
     </script>
