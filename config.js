@@ -22,8 +22,8 @@ let config = {
         commentaires: true
     },
     admin: {
-        certificat_medical: true,
-        reglement: true,
+        certificat_medical: false,
+        reglement: false,
         text_certificat_medical: "Je m'engage à fournir un certificat médical de non contre-indication à la pratique du tennis",
         text_reglement: "J'accepte le règlement intérieur du club"
     },
