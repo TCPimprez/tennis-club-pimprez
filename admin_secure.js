@@ -1,73 +1,47 @@
-// Script pour protéger la page d'administration par mot de passe
+// Script pour protéger la page d'administration avec un mot de passe
 document.addEventListener('DOMContentLoaded', function() {
-    // Vérifier si l'utilisateur est déjà authentifié
-    const isAuthenticated = sessionStorage.getItem('adminAuthenticated');
+    const loginForm = document.getElementById('login-form');
+    const adminPanel = document.getElementById('admin-panel');
+    const loginBtn = document.getElementById('login-btn');
+    const passwordInput = document.getElementById('password');
     
-    if (!isAuthenticated) {
-        // Créer l'overlay de connexion
-        const overlay = document.createElement('div');
-        overlay.style.position = 'fixed';
-        overlay.style.top = '0';
-        overlay.style.left = '0';
-        overlay.style.width = '100%';
-        overlay.style.height = '100%';
-        overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
-        overlay.style.zIndex = '1000';
-        overlay.style.display = 'flex';
-        overlay.style.justifyContent = 'center';
-        overlay.style.alignItems = 'center';
+    // Mot de passe par défaut
+    const defaultPassword = 'pimprez2025';
+    
+    // Vérifier si l'utilisateur est déjà connecté
+    const isLoggedIn = sessionStorage.getItem('adminLoggedIn') === 'true';
+    
+    if (isLoggedIn) {
+        // Si déjà connecté, afficher directement le panneau d'administration
+        loginForm.style.display = 'none';
+        adminPanel.style.display = 'block';
+    } else {
+        // Sinon, afficher le formulaire de connexion
+        loginForm.style.display = 'flex';
+        adminPanel.style.display = 'none';
         
-        // Créer le formulaire de connexion
-        const loginForm = document.createElement('div');
-        loginForm.style.backgroundColor = 'white';
-        loginForm.style.padding = '30px';
-        loginForm.style.borderRadius = '10px';
-        loginForm.style.width = '350px';
-        loginForm.style.maxWidth = '90%';
-        
-        loginForm.innerHTML = `
-            <h3 style="margin-top: 0; color: #4CAF50;">Accès Administration</h3>
-            <p>Veuillez entrer le mot de passe pour accéder au panneau d'administration.</p>
-            <div style="margin-bottom: 15px;">
-                <label for="password" style="display: block; margin-bottom: 5px;">Mot de passe:</label>
-                <input type="password" id="admin-password" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
-            </div>
-            <div id="password-error" style="color: red; margin-bottom: 15px; display: none;">
-                Mot de passe incorrect. Veuillez réessayer.
-            </div>
-            <button id="login-button" style="background-color: #4CAF50; color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer; width: 100%;">
-                Se connecter
-            </button>
-            <div style="margin-top: 15px; text-align: center;">
-                <a href="index.html" style="color: #666; text-decoration: none; font-size: 14px;">Retour au formulaire</a>
-            </div>
-        `;
-        
-        // Ajouter le formulaire à l'overlay
-        overlay.appendChild(loginForm);
-        
-        // Ajouter l'overlay au body
-        document.body.appendChild(overlay);
-        
-        // Gérer la soumission du formulaire
-        document.getElementById('login-button').addEventListener('click', function() {
-            const password = document.getElementById('admin-password').value;
+        // Gérer la soumission du formulaire de connexion
+        loginBtn.addEventListener('click', function() {
+            const password = passwordInput.value;
             
-            // Mot de passe simple à modifier selon vos besoins
-            if (password === 'pimprez2025') {
-                // Authentification réussie
-                sessionStorage.setItem('adminAuthenticated', 'true');
-                overlay.remove();
+            if (password === defaultPassword) {
+                // Mot de passe correct
+                sessionStorage.setItem('adminLoggedIn', 'true');
+                loginForm.style.display = 'none';
+                adminPanel.style.display = 'block';
             } else {
-                // Afficher l'erreur
-                document.getElementById('password-error').style.display = 'block';
+                // Mot de passe incorrect
+                alert('Mot de passe incorrect. Veuillez réessayer.');
+                passwordInput.value = '';
+                passwordInput.focus();
             }
         });
         
-        // Permettre l'utilisation de la touche Entrée
-        document.getElementById('admin-password').addEventListener('keypress', function(e) {
+        // Permettre la validation par la touche Entrée
+        passwordInput.addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
-                document.getElementById('login-button').click();
+                e.preventDefault();
+                loginBtn.click();
             }
         });
     }
