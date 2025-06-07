@@ -9,7 +9,7 @@ let config = {
         prenom: true,
         date_naissance: true,
         nationalite: true,
-        niveau: true,
+        niveau: false,
         licence_fft: false,
         classement: false,
         competitions: true,
@@ -52,11 +52,12 @@ let membreActif = 0;
 
 // Attendre que le DOM soit chargé
 document.addEventListener('DOMContentLoaded', function() {
-    // Charger la configuration depuis le localStorage
-    const savedConfig = localStorage.getItem('formConfig');
-    if (savedConfig) {
-        config = JSON.parse(savedConfig);
-    }
+    // Ne pas charger la configuration depuis le localStorage pour garantir les paramètres par défaut
+    // Cela assure que tous les visiteurs voient la même configuration
+    // const savedConfig = localStorage.getItem('formConfig');
+    // if (savedConfig) {
+    //     config = JSON.parse(savedConfig);
+    // }
     
     // Appliquer la configuration au formulaire
     applyFormConfig(config);
@@ -89,64 +90,109 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
+    // Gérer la suppression d'un membre
+    document.getElementById('btn-delete-member').addEventListener('click', function() {
+        if (famille.membres.length <= 1) {
+            alert("Impossible de supprimer ce membre. Il doit y avoir au moins un membre dans le formulaire.");
+            return;
+        }
+        
+        if (confirm("Êtes-vous sûr de vouloir supprimer ce membre ?")) {
+            // Supprimer le membre actif
+            famille.membres.splice(membreActif, 1);
+            
+            // Ajuster l'index du membre actif si nécessaire
+            if (membreActif >= famille.membres.length) {
+                membreActif = famille.membres.length - 1;
+            }
+            
+            // Mettre à jour l'affichage
+            afficherDonneesMembre(membreActif);
+            updateMemberNavigation();
+            
+            // Mettre à jour le compteur de membres
+            document.getElementById('membre-count').textContent = membreActif + 1;
+            document.getElementById('membre-total').textContent = famille.membres.length;
+        }
+    });
+    
     // Gérer l'affichage des champs pour mineurs
     document.getElementById('date_naissance').addEventListener('change', function() {
         verifierAge();
     });
     
-    // Gérer la soumission du formulaire - VERSION SIMPLIFIÉE POUR FORMSPREE
+    // Gérer la soumission du formulaire - VERSION COMPATIBLE TOUS NAVIGATEURS
     document.getElementById('inscriptionForm').addEventListener('submit', function(e) {
-        // Empêcher temporairement la soumission pour préparer les données
-        e.preventDefault();
-        
-        // Sauvegarder les données du membre actif
-        sauvegarderDonneesMembre(membreActif);
-        
-        // Récupérer les données communes
-        if (config.fields.adresse) famille.adresse = document.getElementById('adresse').value;
-        if (config.fields.code_postal) famille.code_postal = document.getElementById('code_postal').value;
-        if (config.fields.ville) famille.ville = document.getElementById('ville').value;
-        if (config.fields.tel_mobile) famille.tel_mobile = document.getElementById('tel_mobile').value;
-        if (config.fields.tel_fixe) famille.tel_fixe = document.getElementById('tel_fixe').value;
-        if (config.fields.email) famille.email = document.getElementById('email').value;
-        famille.commentaires = document.getElementById('commentaires').value;
-        
-        // Vérifier les champs administratifs
-        if (document.getElementById('certificat_medical')) {
-            famille.certificat_medical = document.getElementById('certificat_medical').checked;
+        try {
+            // Empêcher temporairement la soumission pour préparer les données
+            e.preventDefault();
+            
+            // Sauvegarder les données du membre actif
+            sauvegarderDonneesMembre(membreActif);
+            
+            // Récupérer les données communes
+            if (config.fields.adresse) famille.adresse = document.getElementById('adresse').value;
+            if (config.fields.code_postal) famille.code_postal = document.getElementById('code_postal').value;
+            if (config.fields.ville) famille.ville = document.getElementById('ville').value;
+            if (config.fields.tel_mobile) famille.tel_mobile = document.getElementById('tel_mobile').value;
+            if (config.fields.tel_fixe) famille.tel_fixe = document.getElementById('tel_fixe').value;
+            if (config.fields.email) famille.email = document.getElementById('email').value;
+            famille.commentaires = document.getElementById('commentaires').value;
+            
+            // Vérifier les champs administratifs
+            const certificatMedicalElement = document.getElementById('certificat_medical');
+            if (certificatMedicalElement) {
+                famille.certificat_medical = certificatMedicalElement.checked;
+            }
+            
+            const reglementElement = document.getElementById('reglement');
+            if (reglementElement) {
+                famille.reglement = reglementElement.checked;
+            }
+            
+            // Convertir les données en format JSON pour l'envoi
+            const jsonData = JSON.stringify(famille);
+            
+            // Supprimer les anciens champs cachés s'ils existent
+            const oldHiddenInputs = this.querySelectorAll('input[name="famille_data"], input[name="nombre_membres"]');
+            oldHiddenInputs.forEach(input => input.remove());
+            
+            // Créer un élément caché pour stocker les données JSON
+            let hiddenInput = document.createElement('input');
+            hiddenInput.type = 'hidden';
+            hiddenInput.name = 'famille_data';
+            hiddenInput.value = jsonData;
+            
+            // Ajouter l'élément au formulaire
+            this.appendChild(hiddenInput);
+            
+            // Créer un élément caché pour le nombre de membres
+            hiddenInput = document.createElement('input');
+            hiddenInput.type = 'hidden';
+            hiddenInput.name = 'nombre_membres';
+            hiddenInput.value = famille.membres.length;
+            this.appendChild(hiddenInput);
+            
+            // Afficher le message de confirmation
+            const confirmationMessage = document.getElementById('confirmation-message');
+            const inscriptionForm = document.getElementById('inscriptionForm');
+            
+            // Soumettre le formulaire à Formspree
+            setTimeout(() => {
+                this.submit();
+                
+                // Afficher le message de confirmation après soumission
+                if (confirmationMessage) confirmationMessage.style.display = 'block';
+                if (inscriptionForm) inscriptionForm.style.display = 'none';
+                
+                // Faire défiler vers le haut pour voir le message
+                window.scrollTo(0, 0);
+            }, 100);
+        } catch (error) {
+            console.error("Erreur lors de la soumission du formulaire:", error);
+            // En cas d'erreur, soumettre le formulaire normalement
+            return true;
         }
-        if (document.getElementById('reglement')) {
-            famille.reglement = document.getElementById('reglement').checked;
-        }
-        
-        // Convertir les données en format JSON pour l'envoi
-        const jsonData = JSON.stringify(famille);
-        
-        // Créer un élément caché pour stocker les données JSON
-        let hiddenInput = document.createElement('input');
-        hiddenInput.type = 'hidden';
-        hiddenInput.name = 'famille_data';
-        hiddenInput.value = jsonData;
-        
-        // Ajouter l'élément au formulaire
-        this.appendChild(hiddenInput);
-        
-        // Créer un élément caché pour le nombre de membres
-        hiddenInput = document.createElement('input');
-        hiddenInput.type = 'hidden';
-        hiddenInput.name = 'nombre_membres';
-        hiddenInput.value = famille.membres.length;
-        this.appendChild(hiddenInput);
-        
-        // Soumettre le formulaire à Formspree
-        this.submit();
-        
-        // Afficher le message de confirmation
-        document.getElementById('confirmation-message').style.display = 'block';
-        document.getElementById('inscriptionForm').style.display = 'none';
-        
-        // Faire défiler vers le haut pour voir le message
-        window.scrollTo(0, 0);
     });
     
     // Gérer le bouton de nouvelle inscription
@@ -178,17 +224,22 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('confirmation-message').style.display = 'none';
         document.getElementById('inscriptionForm').style.display = 'block';
     });
-});
-
-// Appliquer la configuration au formulaire
+});    // Appliquer la configuration au formulaire
 function applyFormConfig(config) {
     // Appliquer les couleurs
     document.documentElement.style.setProperty('--header-color', config.headerColor);
     document.documentElement.style.setProperty('--button-color', config.buttonColor);
     
     // Mettre à jour le nom du club et la saison
-    document.getElementById('club-name').textContent = config.clubName;
-    document.getElementById('season').textContent = config.season;
+    const clubNameElement = document.getElementById('club-name');
+    if (clubNameElement) {
+        clubNameElement.textContent = config.clubName;
+    }
+    
+    const seasonElement = document.getElementById('season');
+    if (seasonElement) {
+        seasonElement.textContent = config.season;
+    }
     
     // Afficher/masquer les champs selon la configuration
     for (const [field, visible] of Object.entries(config.fields)) {
@@ -228,7 +279,6 @@ function applyFormConfig(config) {
             }
         }
     }
-}
 
 // Ajouter un nouveau membre
 function ajouterMembre() {
@@ -367,12 +417,14 @@ function verifierAge() {
 }
 
 // Ajouter un lien vers la page d'administration
-const adminLink = document.createElement('a');
-adminLink.href = 'admin.html';
-adminLink.textContent = 'Administration';
-adminLink.style.position = 'fixed';
-adminLink.style.bottom = '10px';
-adminLink.style.right = '10px';
-adminLink.style.fontSize = '12px';
-adminLink.style.color = '#666';
-document.body.appendChild(adminLink);
+document.addEventListener('DOMContentLoaded', function() {
+    const adminLink = document.createElement('a');
+    adminLink.href = 'admin.html';
+    adminLink.textContent = 'Administration';
+    adminLink.style.position = 'fixed';
+    adminLink.style.bottom = '10px';
+    adminLink.style.right = '10px';
+    adminLink.style.fontSize = '12px';
+    adminLink.style.color = '#666';
+    document.body.appendChild(adminLink);
+});
