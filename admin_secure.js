@@ -13,8 +13,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (isLoggedIn) {
         // Si déjà connecté, afficher directement le panneau d'administration
-        loginForm.style.display = 'none';
         adminPanel.style.display = 'block';
+        loginForm.style.display = 'none';
     } else {
         // Sinon, afficher le formulaire de connexion
         loginForm.style.display = 'flex';
