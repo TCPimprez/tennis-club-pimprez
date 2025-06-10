@@ -9,8 +9,7 @@ let config = {
         prenom: true,
         date_naissance: true,
         nationalite: true,
-        niveau: false,
-        licence_fft: false,
+
         classement: false,
         competitions: true,
         adresse: true,
@@ -20,14 +19,7 @@ let config = {
         tel_fixe: false,
         email: true,
         commentaires: true
-    },
-    admin: {
-        certificat_medical: false,
-        reglement: false,
-        text_certificat_medical: "Je m'engage à fournir un certificat médical de non contre-indication à la pratique du tennis",
-        text_reglement: "J'accepte le règlement intérieur du club"
-    },
-    clubName: "Tennis Club de Pimprez",
+    },    clubName: "Tennis Club de Pimprez",
     season: "2025-2026",
     headerColor: "#4CAF50",
     buttonColor: "#4CAF50"
@@ -43,8 +35,7 @@ let famille = {
     tel_fixe: "",
     email: "",
     commentaires: "",
-    certificat_medical: false,
-    reglement: false
+
 };
 
 // Membre actif (celui en cours d'édition)
