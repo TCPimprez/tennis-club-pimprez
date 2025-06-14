@@ -220,18 +220,6 @@
                 <div class="col-md-6">
                     <div class="field-item">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="field_nationalite" checked>
-                            <label class="form-check-label" for="field_nationalite">
-                                Nationalité
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="field-item">
-                        <div class="form-check">
                             <input class="form-check-input" type="checkbox" id="field_prenom" checked>
                             <label class="form-check-label" for="field_prenom">
                                 Prénom
@@ -244,20 +232,6 @@
             
             <h3 class="section-title">Informations sportives</h3>
             <div class="row">
-
-                <div class="col-md-6">
-                    <div class="field-item">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="field_classement">
-                            <label class="form-check-label" for="field_classement">
-                                Classement
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-
                 <div class="col-md-6">
                     <div class="field-item">
                         <div class="form-check">
@@ -421,117 +395,115 @@
                 }
             }
             
-            // Charger la configuration existante
-            let config = localStorage.getItem('formConfig');
-            if (config) {
-                config = JSON.parse(config);
-                
-                // Appliquer la configuration aux champs
-                for (const [key, value] of Object.entries(config.fields)) {
-                    const checkbox = document.getElementById('field_' + key);
-                    if (checkbox) {
-                        checkbox.checked = value;
-                        
-                        // Désactiver les champs obligatoires
-                        if (key === 'nom' || key === 'prenom') {
-                            checkbox.disabled = true;
-                        }
+            // Charger la configuration depuis le localStorage si elle existe
+            const savedConfig = localStorage.getItem('formConfig');
+            if (savedConfig) {
+                try {
+                    const parsedConfig = JSON.parse(savedConfig);
+                    // Appliquer la configuration chargée si elle est valide
+                    if (parsedConfig && typeof parsedConfig === 'object') {
+                        applyAdminConfig(parsedConfig);
                     }
+                } catch (e) {
+                    console.error("Erreur lors du parsing de la configuration sauvegardée:", e);
+                    // Supprimer la configuration invalide pour éviter des erreurs futures
+                    localStorage.removeItem('formConfig');
                 }
-                
-                // Appliquer la configuration aux champs administratifs
-                if (config.admin) {
-                    document.getElementById('field_certificat_medical').checked = config.admin.certificat_medical !== false;
-                    document.getElementById('field_reglement').checked = config.admin.reglement !== false;
-                    
-                    if (config.admin.text_certificat_medical) {
-                        document.getElementById('text_certificat_medical').value = config.admin.text_certificat_medical;
-                    }
-                    
-                    if (config.admin.text_reglement) {
-                        document.getElementById('text_reglement').value = config.admin.text_reglement;
-                    }
-                }
-                
-                // Appliquer la personnalisation
-                document.getElementById('club_name').value = config.clubName || 'Tennis Club de Pimprez';
-                document.getElementById('season').value = config.season || '2025-2026';
-                document.getElementById('header_color').value = config.headerColor || '#4CAF50';
-                document.getElementById('button_color').value = config.buttonColor || '#4CAF50';
             }
-            
-            // Générer le lien de partage avec la configuration actuelle
-            updateShareLink();
-            
-            // Enregistrer la configuration
+
+            // Fonction pour appliquer la configuration à l'interface d'administration
+            function applyAdminConfig(cfg) {
+                // Appliquer les couleurs
+                document.documentElement.style.setProperty('--header-color', cfg.headerColor);
+                document.getElementById('header_color').value = cfg.headerColor;
+                document.getElementById('button_color').value = cfg.buttonColor;
+
+                // Mettre à jour le nom du club et la saison
+                document.getElementById('club_name').value = cfg.clubName;
+                document.getElementById('season').value = cfg.season;
+
+                // Mettre à jour l'état des checkboxes pour les champs
+                for (const [field, visible] of Object.entries(cfg.fields)) {
+                    const checkbox = document.getElementById(`field_${field}`);
+                    if (checkbox) {
+                        checkbox.checked = visible;
+                    }
+                }
+
+                // Mettre à jour l'état des checkboxes et les textes pour les infos admin
+                if (cfg.admin) {
+                    const certMedicalCheckbox = document.getElementById('field_certificat_medical');
+                    if (certMedicalCheckbox) {
+                        certMedicalCheckbox.checked = cfg.admin.certificat_medical;
+                        document.getElementById('text_certificat_medical').value = cfg.admin.text_certificat_medical;
+                    }
+                    const reglementCheckbox = document.getElementById('field_reglement');
+                    if (reglementCheckbox) {
+                        reglementCheckbox.checked = cfg.admin.reglement;
+                        document.getElementById('text_reglement').value = cfg.admin.text_reglement;
+                    }
+                }
+            }
+
+            // Gérer le bouton d'enregistrement
             document.getElementById('btn-save').addEventListener('click', function() {
                 const newConfig = {
                     fields: {},
-                    admin: {
-                        certificat_medical: document.getElementById('field_certificat_medical').checked,
-                        reglement: document.getElementById('field_reglement').checked,
-                        text_certificat_medical: document.getElementById('text_certificat_medical').value,
-                        text_reglement: document.getElementById('text_reglement').value
-                    },
+                    admin: {},
                     clubName: document.getElementById('club_name').value,
                     season: document.getElementById('season').value,
                     headerColor: document.getElementById('header_color').value,
                     buttonColor: document.getElementById('button_color').value
                 };
-                
-                // Récupérer l'état de tous les champs
-                document.querySelectorAll('[id^="field_"]').forEach(checkbox => {
-                    const fieldName = checkbox.id.replace('field_', '');
-                    // Ne pas inclure les champs administratifs dans la section fields
-                    if (fieldName !== 'certificat_medical' && fieldName !== 'reglement') {
-                        newConfig.fields[fieldName] = checkbox.checked;
+
+                // Récupérer l'état des checkboxes pour les champs
+                for (const [field, value] of Object.entries(config.fields)) {
+                    const checkbox = document.getElementById(`field_${field}`);
+                    if (checkbox) {
+                        newConfig.fields[field] = checkbox.checked;
                     }
-                });
-                
-                // Sauvegarder dans le localStorage
-                localStorage.setItem('formConfig', JSON.stringify(newConfig));
-                
-                // Mettre à jour le lien de partage
-                updateShareLink();
-                
-                // Afficher un message de confirmation
-                alert('Configuration enregistrée avec succès !');
-                
-                // Rediriger vers le formulaire
-                window.location.href = 'index.html';
-            });
-            
-            // Fonction pour mettre à jour le lien de partage
-            function updateShareLink() {
-                const config = localStorage.getItem('formConfig');
-                if (config) {
-                    // Encoder la configuration en base64
-                    const encodedConfig = btoa(config);
-                    
-                    // Créer l'URL avec la configuration
-                    const baseUrl = window.location.href.split('?')[0].replace('admin.html', 'index.html');
-                    const shareUrl = `${baseUrl}?config=${encodedConfig}`;
-                    
-                    // Mettre à jour le champ de texte
-                    document.getElementById('share-link').value = shareUrl;
                 }
+
+                // Récupérer l'état des checkboxes et les textes pour les infos admin
+                const certMedicalCheckbox = document.getElementById('field_certificat_medical');
+                if (certMedicalCheckbox) {
+                    newConfig.admin.certificat_medical = certMedicalCheckbox.checked;
+                    newConfig.admin.text_certificat_medical = document.getElementById('text_certificat_medical').value;
+                }
+                const reglementCheckbox = document.getElementById('field_reglement');
+                if (reglementCheckbox) {
+                    newConfig.admin.reglement = reglementCheckbox.checked;
+                    newConfig.admin.text_reglement = document.getElementById('text_reglement').value;
+                }
+
+                // Sauvegarder la nouvelle configuration dans le localStorage
+                localStorage.setItem('formConfig', JSON.stringify(newConfig));
+                alert('Modifications enregistrées !');
+
+                // Mettre à jour le lien de partage
+                updateShareLink(newConfig);
+            });
+
+            // Fonction pour mettre à jour le lien de partage
+            function updateShareLink(cfg) {
+                const shareLinkInput = document.getElementById('share-link');
+                const currentUrl = window.location.origin + window.location.pathname;
+                const encodedConfig = btoa(JSON.stringify(cfg));
+                shareLinkInput.value = `${currentUrl}?config=${encodedConfig}`;
             }
-            
+
             // Gérer le bouton de copie du lien
             document.getElementById('copy-link-btn').addEventListener('click', function() {
-                const shareLink = document.getElementById('share-link');
-                shareLink.select();
+                const shareLinkInput = document.getElementById('share-link');
+                shareLinkInput.select();
                 document.execCommand('copy');
-                
-                // Changer temporairement le texte du bouton
-                const copyBtn = this;
-                const originalText = copyBtn.textContent;
-                copyBtn.textContent = 'Copié !';
-                setTimeout(() => {
-                    copyBtn.textContent = originalText;
-                }, 2000);
+                alert('Lien copié dans le presse-papiers !');
             });
+
+            // Initialiser le lien de partage avec la configuration actuelle
+            updateShareLink(config);
         });
     </script>
 </body>
 </html>
+
