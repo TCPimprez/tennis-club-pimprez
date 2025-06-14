@@ -1,24 +1,22 @@
-<!DOCTYPE html>
 
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Inscription - Tennis Club de Pimprez</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
-<style>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Inscription - Tennis Club de Pimprez</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <style>
         :root {
             --header-color: #4CAF50;
             --button-color: #4CAF50;
         }
-        
         body {
             font-family: 'Arial', sans-serif;
             line-height: 1.6;
             color: #333;
             background-color: #f5f5f5;
         }
-        
         .header {
             background-color: var(--header-color);
             color: white;
@@ -26,17 +24,14 @@
             text-align: center;
             margin-bottom: 30px;
         }
-        
         .header h1 {
             font-size: 2.5rem;
             margin-bottom: 10px;
         }
-        
         .header p {
             font-size: 1.2rem;
             margin: 0;
         }
-        
         .container {
             max-width: 800px;
             margin: 0 auto;
@@ -46,7 +41,6 @@
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             margin-bottom: 30px;
         }
-        
         .section-title {
             color: var(--header-color);
             border-left: 4px solid var(--header-color);
@@ -54,22 +48,18 @@
             margin-top: 30px;
             margin-bottom: 20px;
         }
-        
         .required-field::after {
             content: " *";
             color: red;
         }
-        
         .btn-primary {
             background-color: var(--button-color);
             border-color: var(--button-color);
         }
-        
         .btn-primary:hover {
             background-color: #3d8b40;
             border-color: #3d8b40;
         }
-        
         .member-navigation {
             background-color: #f9f9f9;
             padding: 15px;
@@ -77,20 +67,12 @@
             margin-bottom: 20px;
             text-align: center;
         }
-        
-        .member-count {
-            font-weight: bold;
-            color: var(--header-color);
-        }
-        
         .footer {
             text-align: center;
             padding: 20px 0;
             color: #666;
             font-size: 0.9rem;
         }
-        
-        /* Style pour le message de confirmation */
         #confirmation-message {
             display: none;
             background-color: #d4edda;
@@ -100,12 +82,10 @@
             margin-bottom: 20px;
             text-align: center;
         }
-        
         #confirmation-message h3 {
             color: #155724;
             margin-bottom: 15px;
         }
-        
         .btn-success {
             background-color: var(--button-color);
             border-color: var(--button-color);
@@ -114,169 +94,99 @@
 </head>
 <body>
 <div class="header">
-<img alt="Tennis Club de Pimprez" height="100" src="images/logo.jpg" width="100"/>
-<h1 id="club-name">Tennis Club de Pimprez</h1>
-<p>Formulaire d'inscription - Saison <span id="season">2025-2026</span></p>
+    <img src="images/logo.jpg" alt="Tennis Club de Pimprez" height="100" width="100"/>
+    <h1 id="club-name">Tennis Club de Pimprez</h1>
+    <p>Formulaire d'inscription - Saison <span id="season">2025-2026</span></p>
 </div>
 <div class="container">
-<!-- Message de confirmation -->
-<div id="confirmation-message">
-<h3>Inscription envoyée avec succès !</h3>
-<p>Vos informations ont bien été envoyées à notre équipe. Merci !</p>
-<button class="btn btn-success mt-3" id="btn-new-inscription">Faire une nouvelle inscription</button>
-<p></p></div>
-<form id="inscriptionForm">
-<div class="member-navigation" id="member-navigation" style="display: none;">
-<p>Membre <span id="membre-count">1</span> sur <span id="membre-total">1</span></p>
-<div class="btn-group" role="group">
-<button class="btn btn-outline-secondary" disabled="" id="btn-prev-member" type="button">Précédent</button>
-<button class="btn btn-outline-secondary" disabled="" id="btn-next-member" type="button">Suivant</button>
-<button class="btn btn-outline-primary" id="btn-add-member" type="button">Ajouter un membre</button>
-<button class="btn btn-outline-danger" id="btn-delete-member" type="button">Supprimer ce membre</button>
+    <div id="confirmation-message">
+        <h3>Inscription envoyée avec succès !</h3>
+        <p>Vos informations ont bien été envoyées à notre équipe. Merci !</p>
+        <button class="btn btn-success mt-3" id="btn-new-inscription">Faire une nouvelle inscription</button>
+    </div>
+    <form id="inscriptionForm">
+        <h3 class="section-title">Informations personnelles</h3>
+        <div class="row mb-3">
+            <div class="col-md-6"><label class="form-label required-field" for="civilite">Civilité</label>
+                <select class="form-select" id="civilite" name="civilite" required>
+                    <option value="">Sélectionnez</option>
+                    <option value="M.">M.</option>
+                    <option value="Mme">Mme</option>
+                    <option value="Autre">Autre</option>
+                </select>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-6"><label class="form-label required-field" for="nom">Nom</label>
+                <input class="form-control" id="nom" name="nom" required type="text"/>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-6"><label class="form-label required-field" for="prenom">Prénom</label>
+                <input class="form-control" id="prenom" name="prenom" required type="text"/>
+            </div>
+            <div class="col-md-6"><label class="form-label required-field" for="date_naissance">Date de naissance</label>
+                <input class="form-control" id="date_naissance" name="date_naissance" required type="date"/>
+            </div>
+        </div>
+        <h3 class="section-title">Coordonnées</h3>
+        <div class="row mb-3"><div class="col-md-12">
+            <label class="form-label required-field" for="adresse">Adresse</label>
+            <input class="form-control" id="adresse" name="adresse" required type="text"/>
+        </div></div>
+        <div class="row mb-3">
+            <div class="col-md-6"><label class="form-label required-field" for="code_postal">Code postal</label>
+                <input class="form-control" id="code_postal" name="code_postal" required type="text"/>
+            </div>
+            <div class="col-md-6"><label class="form-label required-field" for="ville">Ville</label>
+                <input class="form-control" id="ville" name="ville" required type="text"/>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-6"><label class="form-label required-field" for="tel_mobile">Téléphone mobile</label>
+                <input class="form-control" id="tel_mobile" name="tel_mobile" required type="tel"/>
+            </div>
+            <div class="col-md-6"><label class="form-label" for="tel_fixe">Téléphone fixe</label>
+                <input class="form-control" id="tel_fixe" name="tel_fixe" type="tel"/>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-6"><label class="form-label required-field" for="email">Email</label>
+                <input class="form-control" id="email" name="email" required type="email"/>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-12 text-center">
+                <button class="btn btn-primary btn-lg" type="submit">Envoyer mon inscription</button>
+            </div>
+        </div>
+    </form>
 </div>
-</div>
-<!-- Informations personnelles -->
-<h3 class="section-title">Informations personnelles</h3>
-<div class="row mb-3">
-<div class="col-md-6" id="container-civilite">
-<label class="form-label required-field" for="civilite">Civilité</label>
-<select class="form-select" id="civilite" name="civilite" required="">
-<option value="">Sélectionnez</option>
-<option value="M.">M.</option>
-<option value="Mme">Mme</option>
-<option value="Autre">Autre</option>
-</select>
-</div>
-
-</div>
-<div class="row mb-3">
-<div class="col-md-6" id="container-nom">
-<label class="form-label required-field" for="nom">Nom</label>
-<input class="form-control" id="nom" name="nom" required="" type="text"/>
-</div>
-</div>
-<div class="row mb-3">
-<div class="col-md-6" id="container-prenom">
-<label class="form-label required-field" for="prenom">Prénom</label>
-<input class="form-control" id="prenom" name="prenom" required="" type="text"/>
-</div><div class="col-md-6" id="container-date_naissance">
-<label class="form-label required-field" for="date_naissance">Date de naissance</label>
-<input class="form-control" id="date_naissance" name="date_naissance" required="" type="date"/>
-</div>
-</div>
-<!-- Section pour les mineurs -->
-<div id="section-mineur" style="display: none;">
-<h3 class="section-title">Informations du représentant légal</h3>
-<div class="row mb-3">
-<div class="col-md-6">
-<label class="form-label required-field" for="parent_nom">Nom du représentant légal</label>
-<input class="form-control" id="parent_nom" name="parent_nom" type="text"/>
-</div>
-<div class="col-md-6">
-<label class="form-label required-field" for="parent_prenom">Prénom du représentant légal</label>
-<input class="form-control" id="parent_prenom" name="parent_prenom" type="text"/>
-</div>
-</div>
-<div class="row mb-3">
-<div class="col-md-6">
-<label class="form-label required-field" for="parent_tel">Téléphone du représentant légal</label>
-<input class="form-control" id="parent_tel" name="parent_tel" type="tel"/>
-</div>
-<div class="col-md-6">
-<label class="form-label required-field" for="parent_email">Email du représentant légal</label>
-<input class="form-control" id="parent_email" name="parent_email" type="email"/>
-</div>
-</div>
-</div>
-<!-- Informations sportives -->
-<h3 class="section-title">Informations sportives</h3>
-<div class="row mb-3">
-<div class="col-md-6" id="container-competitions">
-<div class="form-check mt-4">
-<input class="form-check-input" id="competitions" name="competitions" type="checkbox" value="Oui"/>
-<label class="form-check-label" for="competitions">
-                            Je souhaite participer aux compétitions
-                        </label>
-</div>
-</div>
-</div>
-<!-- Coordonnées -->
-<h3 class="section-title">Coordonnées</h3>
-<p class="text-muted">Ces informations seront partagées par tous les membres de la même famille.</p>
-<div class="row mb-3">
-<div class="col-md-12" id="container-adresse">
-<label class="form-label required-field" for="adresse">Adresse</label>
-<input class="form-control" id="adresse" name="adresse" required="" type="text"/>
-</div>
-</div>
-<div class="row mb-3">
-<div class="col-md-6" id="container-code_postal">
-<label class="form-label required-field" for="code_postal">Code postal</label>
-<input class="form-control" id="code_postal" name="code_postal" required="" type="text"/>
-</div>
-<div class="col-md-6" id="container-ville">
-<label class="form-label required-field" for="ville">Ville</label>
-<input class="form-control" id="ville" name="ville" required="" type="text"/>
-</div>
-</div>
-<div class="row mb-3">
-<div class="col-md-6" id="container-tel_mobile">
-<label class="form-label required-field" for="tel_mobile">Téléphone mobile</label>
-<input class="form-control" id="tel_mobile" name="tel_mobile" required="" type="tel"/>
-</div>
-<div class="col-md-6" id="container-tel_fixe">
-<label class="form-label" for="tel_fixe">Téléphone fixe</label>
-<input class="form-control" id="tel_fixe" name="tel_fixe" type="tel"/>
-</div>
-</div>
-<div class="row mb-3">
-<div class="col-md-6" id="container-email">
-<label class="form-label required-field" for="email">Email</label>
-<input class="form-control" id="email" name="email" required="" type="email"/>
-</div>
-</div>
-<!-- Autres -->
-<h3 class="section-title">Autres informations</h3>
-<div class="row mb-3">
-<div class="col-md-12">
-<label class="form-label" for="commentaires">Commentaires ou informations supplémentaires</label>
-<textarea class="form-control" id="commentaires" name="commentaires" rows="3"></textarea>
-</div>
-</div>
-<!-- Champs cachés pour Formspree -->
-<input name="_subject" type="hidden" value="Nouvelle inscription au Tennis Club de Pimprez"/>
-<input name="_format" type="hidden" value="csv"/>
-<input name="_template" type="hidden" value="table"/>
-<div class="row mt-4">
-<div class="col-md-12 text-center">
-<button class="btn btn-primary btn-lg" type="submit">Envoyer mon inscription</button>
-</div>
-</div>
-</form>
-</div>
-<div class="footer">
-<div class="container">
-<p>Tennis Club de Pimprez - Tous droits réservés</p>
-</div>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="config.js"></script>
-<script src="admin_secure.js"></script>
+<div class="footer"><div class="container">
+    <p>Tennis Club de Pimprez - Tous droits réservés</p>
+</div></div>
 <script>
-// 🎯 Version BASIN.IO – Pas besoin de Google Scripts
-// Formulaire configuré avec ton endpoint personnel
-const BASIN_URL = "https://usebasin.com/f/28ad0c57c7ea";
-
 const confirmationMessage = document.getElementById("confirmation-message");
 confirmationMessage.style.display = "none";
-
 const form = document.getElementById("inscriptionForm");
+let coordonneesPartagees = {};
+const champsFamille = ["adresse", "code_postal", "ville", "email", "tel_mobile", "tel_fixe"];
+window.addEventListener("DOMContentLoaded", () => {
+    champsFamille.forEach(champ => {
+        const champInput = document.querySelector(`[name='${champ}']`);
+        if (champInput && coordonneesPartagees[champ]) {
+            champInput.value = coordonneesPartagees[champ];
+        }
+    });
+});
 form.addEventListener("submit", function(e) {
     e.preventDefault();
-
     const formData = new FormData(form);
-
-    fetch(BASIN_URL, {
+    const data = Object.fromEntries(formData.entries());
+    champsFamille.forEach(champ => {
+        coordonneesPartagees[champ] = data[champ] || "";
+    });
+    fetch("https://usebasin.com/f/28ad0c57c7ea", {
         method: "POST",
         body: formData,
     })
@@ -293,14 +203,18 @@ form.addEventListener("submit", function(e) {
         alert("Une erreur s'est produite. Veuillez réessayer plus tard.");
     });
 });
-
 const btnNewInscription = document.getElementById("btn-new-inscription");
 btnNewInscription.addEventListener("click", () => {
     confirmationMessage.style.display = "none";
     form.style.display = "block";
     form.reset();
+    champsFamille.forEach(champ => {
+        if (coordonneesPartagees[champ]) {
+            const champInput = document.querySelector(`[name='${champ}']`);
+            if (champInput) champInput.value = coordonneesPartagees[champ];
+        }
+    });
 });
 </script>
 </body>
 </html>
-<p><a href="admin.html">Accès Administration</a></p>
