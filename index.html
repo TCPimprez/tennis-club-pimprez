@@ -1,157 +1,136 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <title>Inscription - Tennis Club de Pimprez</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <style>
-    :root { --header-color: #4CAF50; --button-color: #4CAF50; }
-    body { font-family: Arial, sans-serif; background-color: #f5f5f5; }
-    .header { background-color: var(--header-color); color: white; text-align: center; padding: 20px; margin-bottom: 30px; }
-    .header img { height: 100px; }
-    .container { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 6px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-    .section-title { color: var(--header-color); border-left: 4px solid var(--header-color); padding-left: 10px; margin: 30px 0 20px; }
-    #confirmation-message { display: none; background: #d4edda; padding: 20px; border-radius: 6px; margin-bottom: 20px; color: #155724; text-align: center; }
-    .btn-success { background-color: var(--button-color); border-color: var(--button-color); }
-    .member-navigation { text-align: center; margin-bottom: 20px; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription - Tennis Club de Pimprez</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --header-color: #4CAF50;
+            --button-color: #4CAF50;
+        }
+        body { font-family: Arial, sans-serif; background-color: #f5f5f5; }
+        .header { background-color: var(--header-color); color: white; padding: 20px 0; text-align: center; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 5px; margin-top: 30px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .section-title { color: var(--header-color); margin-top: 20px; }
+        .footer { text-align: center; padding: 20px 0; font-size: 0.9rem; color: #666; }
+        #confirmation-message { display: none; background-color: #d4edda; color: #155724; padding: 20px; border-radius: 5px; margin-bottom: 20px; text-align: center; }
+        .btn-primary { background-color: var(--button-color); border-color: var(--button-color); }
+        .btn-success { background-color: var(--button-color); border-color: var(--button-color); }
+    </style>
 </head>
 <body>
-<div class="header">
-  <img src="images/logo.jpg" alt="Logo Tennis Club de Pimprez" />
-  <h1>Tennis Club de Pimprez</h1>
-  <p>Formulaire d'inscription - Saison 2025-2026</p>
-</div>
-<div class="container">
-  <div id="confirmation-message">
-    <h3>Inscription envoyée avec succès !</h3>
-    <p>Merci pour votre inscription. Nous vous contacterons prochainement.</p>
-    <button class="btn btn-success mt-3" id="btn-new-inscription">Faire une nouvelle inscription</button>
-  </div>
-  <form id="inscriptionForm">
-    <div class="member-navigation" id="member-navigation">
-      <p>Membre <span id="membre-count">1</span> sur <span id="membre-total">1</span></p>
-      <div class="btn-group">
-        <button type="button" id="btn-prev-member" class="btn btn-outline-secondary">Précédent</button>
-        <button type="button" id="btn-next-member" class="btn btn-outline-secondary">Suivant</button>
-        <button type="button" id="btn-add-member" class="btn btn-outline-primary">Ajouter un membre</button>
-        <button type="button" id="btn-delete-member" class="btn btn-outline-danger">Supprimer ce membre</button>
-      </div>
+    <div class="header">
+        <img src="images/logo.jpg" alt="Tennis Club de Pimprez" width="100" height="100">
+        <h1>Tennis Club de Pimprez</h1>
+        <p>Formulaire d'inscription - Saison 2025-2026</p>
     </div>
-    <div id="membres-wrapper">
-      <div class="membre-bloc">
-        <h3 class="section-title">Informations personnelles</h3>
-        <div class="mb-3"><label>Nom</label><input name="nom[]" class="form-control" required></div>
-        <div class="mb-3"><label>Prénom</label><input name="prenom[]" class="form-control" required></div>
-        <div class="mb-3"><label>Date de naissance</label><input name="date_naissance[]" type="date" class="form-control" required></div>
-        <h3 class="section-title">Coordonnées</h3>
-        <div class="mb-3"><label>Adresse</label><input name="adresse[]" class="form-control"></div>
-        <div class="mb-3"><label>Code postal</label><input name="code_postal[]" class="form-control"></div>
-        <div class="mb-3"><label>Ville</label><input name="ville[]" class="form-control"></div>
-        <div class="mb-3"><label>Téléphone</label><input name="tel_mobile[]" class="form-control" type="tel"></div>
-        <div class="mb-3"><label>Email</label><input name="email[]" class="form-control" type="email"></div>
-      </div>
+    <div class="container">
+        <div id="confirmation-message">
+            <h3>Inscription envoyée avec succès !</h3>
+            <p>Vos informations ont bien été envoyées à notre équipe. Merci !</p>
+            <button class="btn btn-success mt-3" id="btn-new-inscription">Faire une nouvelle inscription</button>
+        </div>
+        <form id="inscriptionForm">
+            <div class="member-navigation text-center mb-3">
+                <button type="button" class="btn btn-outline-secondary" id="btn-prev-member">Précédent</button>
+                <button type="button" class="btn btn-outline-secondary" id="btn-next-member">Suivant</button>
+                <button type="button" class="btn btn-outline-primary" id="btn-add-member">Ajouter un membre</button>
+                <button type="button" class="btn btn-outline-danger" id="btn-delete-member">Supprimer ce membre</button>
+                <p class="mt-2">Membre <span id="membre-count">1</span> sur <span id="membre-total">1</span></p>
+            </div>
+            <div id="membres-wrapper">
+                <div class="membre-bloc">
+                    <h3 class="section-title">Informations personnelles</h3>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="civilite[]">Civilité *</label>
+                            <select class="form-select" name="civilite[]" required>
+                                <option value="">Sélectionnez</option>
+                                <option value="M.">M.</option>
+                                <option value="Mme">Mme</option>
+                                <option value="Autre">Autre</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="nom[]">Nom *</label>
+                            <input type="text" class="form-control" name="nom[]" required>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="prenom[]">Prénom *</label>
+                            <input type="text" class="form-control" name="prenom[]" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="date_naissance[]">Date de naissance *</label>
+                            <input type="date" class="form-control" name="date_naissance[]" required>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="parent_nom[]">Nom du représentant légal *</label>
+                            <input type="text" class="form-control" name="parent_nom[]">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="parent_prenom[]">Prénom du représentant légal *</label>
+                            <input type="text" class="form-control" name="parent_prenom[]">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="parent_tel[]">Téléphone du représentant légal *</label>
+                            <input type="tel" class="form-control" name="parent_tel[]">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="parent_email[]">Email du représentant légal *</label>
+                            <input type="email" class="form-control" name="parent_email[]">
+                        </div>
+                    </div>
+                    <h3 class="section-title">Coordonnées</h3>
+                    <div class="mb-3">
+                        <label for="adresse[]">Adresse *</label>
+                        <input type="text" class="form-control" name="adresse[]" required>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="code_postal[]">Code postal *</label>
+                            <input type="text" class="form-control" name="code_postal[]" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="ville[]">Ville *</label>
+                            <input type="text" class="form-control" name="ville[]" required>
+                        </div>
+                    </div>
+                    <h3 class="section-title">Contact</h3>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="tel_mobile[]">Téléphone mobile *</label>
+                            <input type="tel" class="form-control" name="tel_mobile[]" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="email[]">Email *</label>
+                            <input type="email" class="form-control" name="email[]" required>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="commentaires[]">Commentaires</label>
+                        <textarea class="form-control" name="commentaires[]"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <button class="btn btn-primary btn-lg mt-3" type="submit">Envoyer mon inscription</button>
+            </div>
+        </form>
     </div>
-    <div class="text-center mt-4">
-      <button type="submit" class="btn btn-primary btn-lg">Envoyer mon inscription</button>
+    <div class="footer">
+        <p>Tennis Club de Pimprez - Tous droits réservés</p>
     </div>
-  </form>
-</div>
-<script>
-const confirmationMessage = document.getElementById("confirmation-message");
-confirmationMessage.style.display = "none";
-const form = document.getElementById("inscriptionForm");
-const membreContainer = document.getElementById("membres-wrapper");
-const btnSuivant = document.getElementById("btn-next-member");
-const btnPrecedent = document.getElementById("btn-prev-member");
-const btnAdd = document.getElementById("btn-add-member");
-const btnDelete = document.getElementById("btn-delete-member");
-const compteur = document.getElementById("membre-count");
-const total = document.getElementById("membre-total");
-let membres = [];
-let membreIndex = 0;
-const champsPartages = ["adresse", "code_postal", "ville"];
-
-function majAffichage() {
-  membres.forEach((bloc, i) => bloc.style.display = i === membreIndex ? "block" : "none");
-  compteur.textContent = membreIndex + 1;
-  total.textContent = membres.length;
-  btnPrecedent.disabled = membreIndex === 0;
-  btnSuivant.disabled = membreIndex === membres.length - 1;
-  btnDelete.disabled = membres.length === 1;
-}
-
-function ajouterMembre() {
-  const original = membres[0];
-  const clone = original.cloneNode(true);
-  membreContainer.appendChild(clone);
-  clone.querySelectorAll("input, select").forEach(input => {
-    const name = input.name;
-    input.value = "";
-    if (champsPartages.includes(name)) {
-      const ref = membres[0].querySelector(`[name='${name}']`);
-      if (ref) input.value = ref.value;
-    }
-  });
-  membres.push(clone);
-  membreIndex = membres.length - 1;
-  majAffichage();
-}
-
-function supprimerMembre() {
-  if (membres.length > 1) {
-    const bloc = membres.pop();
-    bloc.remove();
-    membreIndex = Math.max(0, membreIndex - 1);
-    majAffichage();
-  }
-}
-
-btnAdd.addEventListener("click", ajouterMembre);
-btnDelete.addEventListener("click", supprimerMembre);
-btnSuivant.addEventListener("click", () => {
-  if (membreIndex < membres.length - 1) {
-    membreIndex++;
-    majAffichage();
-  }
-});
-btnPrecedent.addEventListener("click", () => {
-  if (membreIndex > 0) {
-    membreIndex--;
-    majAffichage();
-  }
-});
-
-form.addEventListener("submit", async function(e) {
-  e.preventDefault();
-  const submitPromises = membres.map(bloc => {
-    const data = new FormData();
-    bloc.querySelectorAll("input, select, textarea").forEach(input => {
-      if (input.name) data.append(input.name.replace("[]", ""), input.value);
-    });
-    return fetch("https://usebasin.com/f/28ad0c57c7ea", {
-      method: "POST",
-      body: data
-    });
-  });
-  try {
-    const results = await Promise.all(submitPromises);
-    const allOk = results.every(res => res.ok);
-    if (allOk) {
-      form.style.display = "none";
-      confirmationMessage.style.display = "block";
-    } else {
-      alert("Certaines inscriptions n'ont pas pu être envoyées. Veuillez réessayer.");
-    }
-  } catch (err) {
-    console.error(err);
-    alert("Erreur réseau lors de l'envoi du formulaire.");
-  }
-});
-
-membres = Array.from(document.querySelectorAll(".membre-bloc"));
-majAffichage();
-</script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="admin_secure.js"></script>
+    <script src="config.js"></script>
 </body>
 </html>
