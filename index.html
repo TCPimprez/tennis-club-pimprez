@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inscription - Tennis Club de Pimprez</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Inscription - Tennis Club de Pimprez</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<style>
         :root {
             --header-color: #4CAF50;
             --button-color: #4CAF50;
@@ -112,169 +113,159 @@
     </style>
 </head>
 <body>
-    <div class="header">
-        <img src="images/logo.jpg" alt="Tennis Club de Pimprez" width="100" height="100">
-        <h1 id="club-name">Tennis Club de Pimprez</h1>
-        <p>Formulaire d'inscription - Saison <span id="season">2025-2026</span></p>
-    </div>
-    
-    <div class="container">
-        <!-- Message de confirmation -->
-        <div id="confirmation-message">
-            <h3>Inscription envoyée avec succès !</h3>
-            <p>Merci pour votre inscription au Tennis Club de Pimprez. Nous avons bien reçu vos informations et nous vous contacterons prochainement.</p>
-            <button id="btn-new-inscription" class="btn btn-success mt-3">Faire une nouvelle inscription</button>
-        </div>
-        
-        <form id="inscriptionForm" >
-            <div id="member-navigation" style="display: none;" class="member-navigation">
-                <p>Membre <span id="membre-count">1</span> sur <span id="membre-total">1</span></p>
-                <div class="btn-group" role="group">
-                    <button type="button" id="btn-prev-member" class="btn btn-outline-secondary" disabled>Précédent</button>
-                    <button type="button" id="btn-next-member" class="btn btn-outline-secondary" disabled>Suivant</button>
-                    <button type="button" id="btn-add-member" class="btn btn-outline-primary">Ajouter un membre</button>
-                    <button type="button" id="btn-delete-member" class="btn btn-outline-danger">Supprimer ce membre</button>
-                </div>
-            </div>
-            
-            <!-- Informations personnelles -->
-            <h3 class="section-title">Informations personnelles</h3>
-            <div class="row mb-3">
-                <div class="col-md-6" id="container-civilite">
-                    <label for="civilite" class="form-label required-field">Civilité</label>
-                    <select class="form-select" id="civilite" name="civilite" required>
-                        <option value="">Sélectionnez</option>
-                        <option value="M.">M.</option>
-                        <option value="Mme">Mme</option>
-                        <option value="Autre">Autre</option>
-                    </select>
-                </div>
-                <div class="col-md-6" id="container-date_naissance">
-                    <label for="date_naissance" class="form-label required-field">Date de naissance</label>
-                    <input type="date" class="form-control" id="date_naissance" name="date_naissance" required>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col-md-6" id="container-nom">
-                    <label for="nom" class="form-label required-field">Nom</label>
-                    <input type="text" class="form-control" id="nom" name="nom" required>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col-md-6" id="container-prenom">
-                    <label for="prenom" class="form-label required-field">Prénom</label>
-                    <input type="text" class="form-control" id="prenom" name="prenom" required>
-                </div>
-            </div>
-            
-            <!-- Section pour les mineurs -->
-            <div id="section-mineur" style="display: none;">
-                <h3 class="section-title">Informations du représentant légal</h3>
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        <label for="parent_nom" class="form-label required-field">Nom du représentant légal</label>
-                        <input type="text" class="form-control" id="parent_nom" name="parent_nom">
-                    </div>
-                    <div class="col-md-6">
-                        <label for="parent_prenom" class="form-label required-field">Prénom du représentant légal</label>
-                        <input type="text" class="form-control" id="parent_prenom" name="parent_prenom">
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        <label for="parent_tel" class="form-label required-field">Téléphone du représentant légal</label>
-                        <input type="tel" class="form-control" id="parent_tel" name="parent_tel">
-                    </div>
-                    <div class="col-md-6">
-                        <label for="parent_email" class="form-label required-field">Email du représentant légal</label>
-                        <input type="email" class="form-control" id="parent_email" name="parent_email">
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Informations sportives -->
-            <h3 class="section-title">Informations sportives</h3>
-            <div class="row mb-3">
-                <div class="col-md-6" id="container-competitions">
-                    <div class="form-check mt-4">
-                        <input class="form-check-input" type="checkbox" id="competitions" name="competitions" value="Oui">
-                        <label class="form-check-label" for="competitions">
+<div class="header">
+<img alt="Tennis Club de Pimprez" height="100" src="images/logo.jpg" width="100"/>
+<h1 id="club-name">Tennis Club de Pimprez</h1>
+<p>Formulaire d'inscription - Saison <span id="season">2025-2026</span></p>
+</div>
+<div class="container">
+<!-- Message de confirmation -->
+<div id="confirmation-message">
+<h3>Inscription envoyée avec succès !</h3>
+<p>Merci pour votre inscription au Tennis Club de Pimprez. Nous avons bien reçu vos informations et nous vous contacterons prochainement.</p>
+<button class="btn btn-success mt-3" id="btn-new-inscription">Faire une nouvelle inscription</button>
+</div>
+<form id="inscriptionForm">
+<div class="member-navigation" id="member-navigation" style="display: none;">
+<p>Membre <span id="membre-count">1</span> sur <span id="membre-total">1</span></p>
+<div class="btn-group" role="group">
+<button class="btn btn-outline-secondary" disabled="" id="btn-prev-member" type="button">Précédent</button>
+<button class="btn btn-outline-secondary" disabled="" id="btn-next-member" type="button">Suivant</button>
+<button class="btn btn-outline-primary" id="btn-add-member" type="button">Ajouter un membre</button>
+<button class="btn btn-outline-danger" id="btn-delete-member" type="button">Supprimer ce membre</button>
+</div>
+</div>
+<!-- Informations personnelles -->
+<h3 class="section-title">Informations personnelles</h3>
+<div class="row mb-3">
+<div class="col-md-6" id="container-civilite">
+<label class="form-label required-field" for="civilite">Civilité</label>
+<select class="form-select" id="civilite" name="civilite" required="">
+<option value="">Sélectionnez</option>
+<option value="M.">M.</option>
+<option value="Mme">Mme</option>
+<option value="Autre">Autre</option>
+</select>
+</div>
+<div class="col-md-6" id="container-date_naissance">
+<label class="form-label required-field" for="date_naissance">Date de naissance</label>
+<input class="form-control" id="date_naissance" name="date_naissance" required="" type="date"/>
+</div>
+</div>
+<div class="row mb-3">
+<div class="col-md-6" id="container-nom">
+<label class="form-label required-field" for="nom">Nom</label>
+<input class="form-control" id="nom" name="nom" required="" type="text"/>
+</div>
+</div>
+<div class="row mb-3">
+<div class="col-md-6" id="container-prenom">
+<label class="form-label required-field" for="prenom">Prénom</label>
+<input class="form-control" id="prenom" name="prenom" required="" type="text"/>
+</div>
+</div>
+<!-- Section pour les mineurs -->
+<div id="section-mineur" style="display: none;">
+<h3 class="section-title">Informations du représentant légal</h3>
+<div class="row mb-3">
+<div class="col-md-6">
+<label class="form-label required-field" for="parent_nom">Nom du représentant légal</label>
+<input class="form-control" id="parent_nom" name="parent_nom" type="text"/>
+</div>
+<div class="col-md-6">
+<label class="form-label required-field" for="parent_prenom">Prénom du représentant légal</label>
+<input class="form-control" id="parent_prenom" name="parent_prenom" type="text"/>
+</div>
+</div>
+<div class="row mb-3">
+<div class="col-md-6">
+<label class="form-label required-field" for="parent_tel">Téléphone du représentant légal</label>
+<input class="form-control" id="parent_tel" name="parent_tel" type="tel"/>
+</div>
+<div class="col-md-6">
+<label class="form-label required-field" for="parent_email">Email du représentant légal</label>
+<input class="form-control" id="parent_email" name="parent_email" type="email"/>
+</div>
+</div>
+</div>
+<!-- Informations sportives -->
+<h3 class="section-title">Informations sportives</h3>
+<div class="row mb-3">
+<div class="col-md-6" id="container-competitions">
+<div class="form-check mt-4">
+<input class="form-check-input" id="competitions" name="competitions" type="checkbox" value="Oui"/>
+<label class="form-check-label" for="competitions">
                             Je souhaite participer aux compétitions
                         </label>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Coordonnées -->
-            <h3 class="section-title">Coordonnées</h3>
-            <p class="text-muted">Ces informations seront partagées par tous les membres de la même famille.</p>
-            <div class="row mb-3">
-                <div class="col-md-12" id="container-adresse">
-                    <label for="adresse" class="form-label required-field">Adresse</label>
-                    <input type="text" class="form-control" id="adresse" name="adresse" required>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col-md-6" id="container-code_postal">
-                    <label for="code_postal" class="form-label required-field">Code postal</label>
-                    <input type="text" class="form-control" id="code_postal" name="code_postal" required>
-                </div>
-                <div class="col-md-6" id="container-ville">
-                    <label for="ville" class="form-label required-field">Ville</label>
-                    <input type="text" class="form-control" id="ville" name="ville" required>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col-md-6" id="container-tel_mobile">
-                    <label for="tel_mobile" class="form-label required-field">Téléphone mobile</label>
-                    <input type="tel" class="form-control" id="tel_mobile" name="tel_mobile" required>
-                </div>
-                <div class="col-md-6" id="container-tel_fixe">
-                    <label for="tel_fixe" class="form-label">Téléphone fixe</label>
-                    <input type="tel" class="form-control" id="tel_fixe" name="tel_fixe">
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col-md-6" id="container-email">
-                    <label for="email" class="form-label required-field">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" required>
-                </div>
-            </div>
+</div>
+</div>
+</div>
+<!-- Coordonnées -->
+<h3 class="section-title">Coordonnées</h3>
+<p class="text-muted">Ces informations seront partagées par tous les membres de la même famille.</p>
+<div class="row mb-3">
+<div class="col-md-12" id="container-adresse">
+<label class="form-label required-field" for="adresse">Adresse</label>
+<input class="form-control" id="adresse" name="adresse" required="" type="text"/>
+</div>
+</div>
+<div class="row mb-3">
+<div class="col-md-6" id="container-code_postal">
+<label class="form-label required-field" for="code_postal">Code postal</label>
+<input class="form-control" id="code_postal" name="code_postal" required="" type="text"/>
+</div>
+<div class="col-md-6" id="container-ville">
+<label class="form-label required-field" for="ville">Ville</label>
+<input class="form-control" id="ville" name="ville" required="" type="text"/>
+</div>
+</div>
+<div class="row mb-3">
+<div class="col-md-6" id="container-tel_mobile">
+<label class="form-label required-field" for="tel_mobile">Téléphone mobile</label>
+<input class="form-control" id="tel_mobile" name="tel_mobile" required="" type="tel"/>
+</div>
+<div class="col-md-6" id="container-tel_fixe">
+<label class="form-label" for="tel_fixe">Téléphone fixe</label>
+<input class="form-control" id="tel_fixe" name="tel_fixe" type="tel"/>
+</div>
+</div>
+<div class="row mb-3">
+<div class="col-md-6" id="container-email">
+<label class="form-label required-field" for="email">Email</label>
+<input class="form-control" id="email" name="email" required="" type="email"/>
+</div>
+</div>
+<!-- Autres -->
+<h3 class="section-title">Autres informations</h3>
+<div class="row mb-3">
+<div class="col-md-12">
+<label class="form-label" for="commentaires">Commentaires ou informations supplémentaires</label>
+<textarea class="form-control" id="commentaires" name="commentaires" rows="3"></textarea>
+</div>
+</div>
+<!-- Champs cachés pour Formspree -->
+<input name="_subject" type="hidden" value="Nouvelle inscription au Tennis Club de Pimprez"/>
+<input name="_format" type="hidden" value="csv"/>
+<input name="_template" type="hidden" value="table"/>
+<div class="row mt-4">
+<div class="col-md-12 text-center">
+<button class="btn btn-primary btn-lg" type="submit">Envoyer mon inscription</button>
+</div>
+</div>
+</form>
+</div>
+<div class="footer">
+<div class="container">
+<p>Tennis Club de Pimprez - Tous droits réservés</p>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="config.js"></script>
+<script src="admin_secure.js"></script>
 
-            <!-- Autres -->
-            <h3 class="section-title">Autres informations</h3>
-            <div class="row mb-3">
-                <div class="col-md-12">
-                    <label for="commentaires" class="form-label">Commentaires ou informations supplémentaires</label>
-                    <textarea class="form-control" id="commentaires" name="commentaires" rows="3"></textarea>
-                </div>
-            </div>
-            
-            <!-- Champs cachés pour Formspree -->
-            <input type="hidden" name="_subject" value="Nouvelle inscription au Tennis Club de Pimprez">
-            <input type="hidden" name="_format" value="csv">
-            <input type="hidden" name="_template" value="table">
-            
-            <div class="row mt-4">
-                <div class="col-md-12 text-center">
-                    <button type="submit" class="btn btn-primary btn-lg">Envoyer mon inscription</button>
-                </div>
-            </div>
-        </form>
-    </div>
-    
-    <div class="footer">
-        <div class="container">
-            <p>Tennis Club de Pimprez - Tous droits réservés</p>
-        </div>
-    </div>
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="config.js"></script>
-    <script src="admin_secure.js"></script>
 <script>
-// Remplacer ceci par l'URL de ton script Google Apps Script
-const SCRIPT_URL = "https://script.google.com/macros/s/TON_ID_SCRIPT/exec";
+// URL de ton script Google Apps Script (déployé en mode "Application web")
+const SCRIPT_URL = "https://script.google.com/macros/s/1tEER5oczsRm1-xUOnhOba_7pnxQPTg_hYsfj5Vkrd7I/exec";
 
 // Cacher le message de confirmation au chargement
 const confirmationMessage = document.getElementById("confirmation-message");
@@ -315,9 +306,6 @@ btnNewInscription.addEventListener("click", () => {
     form.reset();
 });
 </script>
-
 </body>
 </html>
-
-            <p><a href="admin.html">Accès Administration</a></p>
-
+<p><a href="admin.html">Accès Administration</a></p>
