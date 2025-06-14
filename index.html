@@ -1,77 +1,64 @@
-
 <!DOCTYPE html>
-
 <html lang="fr">
 <head>
-<meta charset="utf-8"/>
-<title>Inscription - Tennis Club de Pimprez</title>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
-<style>
-        :root { --header-color: #4CAF50; --button-color: #4CAF50; }
-        body { font-family: Arial, sans-serif; background-color: #f5f5f5; }
-        .header { background-color: var(--header-color); color: white; text-align: center; padding: 20px; margin-bottom: 30px; }
-        .header img { height: 100px; }
-        .container { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 6px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        .section-title { color: var(--header-color); border-left: 4px solid var(--header-color); padding-left: 10px; margin: 30px 0 20px; }
-        #confirmation-message { display: none; background: #d4edda; padding: 20px; border-radius: 6px; margin-bottom: 20px; color: #155724; text-align: center; }
-        .btn-success { background-color: var(--button-color); border-color: var(--button-color); }
-        .member-navigation { text-align: center; margin-bottom: 20px; }
-    </style>
+  <meta charset="UTF-8" />
+  <title>Inscription - Tennis Club de Pimprez</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    :root { --header-color: #4CAF50; --button-color: #4CAF50; }
+    body { font-family: Arial, sans-serif; background-color: #f5f5f5; }
+    .header { background-color: var(--header-color); color: white; text-align: center; padding: 20px; margin-bottom: 30px; }
+    .header img { height: 100px; }
+    .container { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 6px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    .section-title { color: var(--header-color); border-left: 4px solid var(--header-color); padding-left: 10px; margin: 30px 0 20px; }
+    #confirmation-message { display: none; background: #d4edda; padding: 20px; border-radius: 6px; margin-bottom: 20px; color: #155724; text-align: center; }
+    .btn-success { background-color: var(--button-color); border-color: var(--button-color); }
+    .member-navigation { text-align: center; margin-bottom: 20px; }
+  </style>
 </head>
 <body>
 <div class="header">
-<img alt="Logo Tennis Club de Pimprez" src="images/logo.jpg"/>
-<h1>Tennis Club de Pimprez</h1>
-<p>Formulaire d'inscription - Saison 2025-2026</p>
+  <img src="images/logo.jpg" alt="Logo Tennis Club de Pimprez" />
+  <h1>Tennis Club de Pimprez</h1>
+  <p>Formulaire d'inscription - Saison 2025-2026</p>
 </div>
 <div class="container">
-<div id="confirmation-message">
-<h3>Inscription envoyée avec succès !</h3>
-<p>Merci pour votre inscription. Nous vous contacterons prochainement.</p>
-<button class="btn btn-success mt-3" id="btn-new-inscription">Faire une nouvelle inscription</button>
-</div>
-<form id="inscriptionForm">
-<div class="member-navigation" id="member-navigation">
-<p>Membre <span id="membre-count">1</span> sur <span id="membre-total">1</span></p>
-<div class="btn-group">
-<button class="btn btn-outline-secondary" id="btn-prev-member" type="button">Précédent</button>
-<button class="btn btn-outline-secondary" id="btn-next-member" type="button">Suivant</button>
-<button class="btn btn-outline-primary" id="btn-add-member" type="button">Ajouter un membre</button>
-<button class="btn btn-outline-danger" id="btn-delete-member" type="button">Supprimer ce membre</button>
-</div>
-</div>
-<div id="membres-wrapper">
-<div class="membre-bloc">
-<h3 class="section-title">Informations personnelles</h3>
-<div class="mb-3">
-<label>Civilité</label>
-<select class="form-select" name="civilite[]"><option value="">Sélectionnez</option><option>M.</option><option>Mme</option></select>
-</div>
-<div class="mb-3"><label>Nom</label><input class="form-control" name="nom[]" required=""/></div>
-<div class="mb-3"><label>Prénom</label><input class="form-control" name="prenom[]" required=""/></div>
-<div class="mb-3"><label>Date de naissance</label><input class="form-control" name="date_naissance[]" required="" type="date"/></div>
-<h3 class="section-title">Informations sportives</h3>
-<div class="form-check mb-3">
-<input class="form-check-input" name="competitions[]" type="checkbox" value="Oui">
-<label class="form-check-label">Je souhaite participer aux compétitions</label>
-</input></div>
-<h3 class="section-title">Coordonnées</h3>
-<div class="mb-3"><label>Adresse</label><input class="form-control" name="adresse[]"/></div>
-<div class="mb-3"><label>Code postal</label><input class="form-control" name="code_postal[]"/></div>
-<div class="mb-3"><label>Ville</label><input class="form-control" name="ville[]"/></div>
-<div class="mb-3"><label>Téléphone</label><input class="form-control" name="tel_mobile[]" type="tel"/></div>
-<div class="mb-3"><label>Email</label><input class="form-control" name="email[]" type="email"/></div>
-</div>
-</div>
-<div class="text-center mt-4">
-<button class="btn btn-primary btn-lg" type="submit">Envoyer mon inscription</button>
-</div>
-</form>
+  <div id="confirmation-message">
+    <h3>Inscription envoyée avec succès !</h3>
+    <p>Merci pour votre inscription. Nous vous contacterons prochainement.</p>
+    <button class="btn btn-success mt-3" id="btn-new-inscription">Faire une nouvelle inscription</button>
+  </div>
+  <form id="inscriptionForm">
+    <div class="member-navigation" id="member-navigation">
+      <p>Membre <span id="membre-count">1</span> sur <span id="membre-total">1</span></p>
+      <div class="btn-group">
+        <button type="button" id="btn-prev-member" class="btn btn-outline-secondary">Précédent</button>
+        <button type="button" id="btn-next-member" class="btn btn-outline-secondary">Suivant</button>
+        <button type="button" id="btn-add-member" class="btn btn-outline-primary">Ajouter un membre</button>
+        <button type="button" id="btn-delete-member" class="btn btn-outline-danger">Supprimer ce membre</button>
+      </div>
+    </div>
+    <div id="membres-wrapper">
+      <div class="membre-bloc">
+        <h3 class="section-title">Informations personnelles</h3>
+        <div class="mb-3"><label>Nom</label><input name="nom[]" class="form-control" required></div>
+        <div class="mb-3"><label>Prénom</label><input name="prenom[]" class="form-control" required></div>
+        <div class="mb-3"><label>Date de naissance</label><input name="date_naissance[]" type="date" class="form-control" required></div>
+        <h3 class="section-title">Coordonnées</h3>
+        <div class="mb-3"><label>Adresse</label><input name="adresse[]" class="form-control"></div>
+        <div class="mb-3"><label>Code postal</label><input name="code_postal[]" class="form-control"></div>
+        <div class="mb-3"><label>Ville</label><input name="ville[]" class="form-control"></div>
+        <div class="mb-3"><label>Téléphone</label><input name="tel_mobile[]" class="form-control" type="tel"></div>
+        <div class="mb-3"><label>Email</label><input name="email[]" class="form-control" type="email"></div>
+      </div>
+    </div>
+    <div class="text-center mt-4">
+      <button type="submit" class="btn btn-primary btn-lg">Envoyer mon inscription</button>
+    </div>
+  </form>
 </div>
 <script>
-// ✨ Multi-membres avec navigation Précédent/Suivant et copie seulement adresse, CP, ville
-
 const confirmationMessage = document.getElementById("confirmation-message");
 confirmationMessage.style.display = "none";
 const form = document.getElementById("inscriptionForm");
@@ -82,83 +69,87 @@ const btnAdd = document.getElementById("btn-add-member");
 const btnDelete = document.getElementById("btn-delete-member");
 const compteur = document.getElementById("membre-count");
 const total = document.getElementById("membre-total");
-
 let membres = [];
 let membreIndex = 0;
 const champsPartages = ["adresse", "code_postal", "ville"];
 
 function majAffichage() {
-    membres.forEach((bloc, i) => bloc.style.display = i === membreIndex ? "block" : "none");
-    compteur.textContent = membreIndex + 1;
-    total.textContent = membres.length;
-    btnPrecedent.disabled = membreIndex === 0;
-    btnSuivant.disabled = membreIndex === membres.length - 1;
-    btnDelete.disabled = membres.length === 1;
+  membres.forEach((bloc, i) => bloc.style.display = i === membreIndex ? "block" : "none");
+  compteur.textContent = membreIndex + 1;
+  total.textContent = membres.length;
+  btnPrecedent.disabled = membreIndex === 0;
+  btnSuivant.disabled = membreIndex === membres.length - 1;
+  btnDelete.disabled = membres.length === 1;
 }
 
 function ajouterMembre() {
-    const original = membres[0];
-    const clone = original.cloneNode(true);
-    membreContainer.appendChild(clone);
-    clone.querySelectorAll("input, select").forEach(input => {
-        const name = input.name;
-        input.value = "";
-        if (champsPartages.includes(name)) {
-            const ref = membres[0].querySelector(`[name='${name}']`);
-            if (ref) input.value = ref.value;
-        }
-    });
-    membres.push(clone);
-    membreIndex = membres.length - 1;
-    majAffichage();
+  const original = membres[0];
+  const clone = original.cloneNode(true);
+  membreContainer.appendChild(clone);
+  clone.querySelectorAll("input, select").forEach(input => {
+    const name = input.name;
+    input.value = "";
+    if (champsPartages.includes(name)) {
+      const ref = membres[0].querySelector(`[name='${name}']`);
+      if (ref) input.value = ref.value;
+    }
+  });
+  membres.push(clone);
+  membreIndex = membres.length - 1;
+  majAffichage();
 }
 
 function supprimerMembre() {
-    if (membres.length > 1) {
-        const bloc = membres.pop();
-        bloc.remove();
-        membreIndex = Math.max(0, membreIndex - 1);
-        majAffichage();
-    }
+  if (membres.length > 1) {
+    const bloc = membres.pop();
+    bloc.remove();
+    membreIndex = Math.max(0, membreIndex - 1);
+    majAffichage();
+  }
 }
 
 btnAdd.addEventListener("click", ajouterMembre);
 btnDelete.addEventListener("click", supprimerMembre);
 btnSuivant.addEventListener("click", () => {
-    if (membreIndex < membres.length - 1) {
-        membreIndex++;
-        majAffichage();
-    }
+  if (membreIndex < membres.length - 1) {
+    membreIndex++;
+    majAffichage();
+  }
 });
 btnPrecedent.addEventListener("click", () => {
-    if (membreIndex > 0) {
-        membreIndex--;
-        majAffichage();
-    }
+  if (membreIndex > 0) {
+    membreIndex--;
+    majAffichage();
+  }
 });
 
-form.addEventListener("submit", function(e) {
-    e.preventDefault();
-    const formData = new FormData(form);
-    fetch("https://usebasin.com/f/28ad0c57c7ea", {
-        method: "POST",
-        body: formData,
-    })
-    .then(res => {
-        if (res.ok) {
-            form.style.display = "none";
-            confirmationMessage.style.display = "block";
-        } else {
-            alert("Erreur d'envoi, veuillez réessayer.");
-        }
-    })
-    .catch(err => {
-        console.error(err);
-        alert("Erreur réseau, réessayer plus tard.");
+form.addEventListener("submit", async function(e) {
+  e.preventDefault();
+  const submitPromises = membres.map(bloc => {
+    const data = new FormData();
+    bloc.querySelectorAll("input, select, textarea").forEach(input => {
+      if (input.name) data.append(input.name.replace("[]", ""), input.value);
     });
+    return fetch("https://usebasin.com/f/28ad0c57c7ea", {
+      method: "POST",
+      body: data
+    });
+  });
+  try {
+    const results = await Promise.all(submitPromises);
+    const allOk = results.every(res => res.ok);
+    if (allOk) {
+      form.style.display = "none";
+      confirmationMessage.style.display = "block";
+    } else {
+      alert("Certaines inscriptions n'ont pas pu être envoyées. Veuillez réessayer.");
+    }
+  } catch (err) {
+    console.error(err);
+    alert("Erreur réseau lors de l'envoi du formulaire.");
+  }
 });
 
-// Initialisation
 membres = Array.from(document.querySelectorAll(".membre-bloc"));
 majAffichage();
 </script>
