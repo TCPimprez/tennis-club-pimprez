@@ -13,8 +13,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (isLoggedIn) {
         // Si déjà connecté, afficher directement le panneau d'administration
-        adminPanel.style.display = 'block';
         loginForm.style.display = 'none';
+        adminPanel.style.display = 'block';
     } else {
         // Sinon, afficher le formulaire de connexion
         loginForm.style.display = 'flex';
@@ -46,3 +46,4 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
