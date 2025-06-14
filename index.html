@@ -166,7 +166,6 @@
 <div class="footer"><div class="container">
 <p>Tennis Club de Pimprez - Tous droits réservés</p>
 </div></div>
-
 <script>
 // ✨ Amélioration : conservez les données familiales partagées entre membres (adresse, ville, email...) + bouton Ajouter un membre
 
@@ -175,9 +174,11 @@ confirmationMessage.style.display = "none";
 
 const form = document.getElementById("inscriptionForm");
 
+// Mémoriser les champs partagés (coordonnées) entre membres d'une même famille
 let coordonneesPartagees = {};
 const champsFamille = ["adresse", "code_postal", "ville", "email", "tel_mobile", "tel_fixe"];
 
+// Charger les coordonnées déjà mémorisées au démarrage
 window.addEventListener("DOMContentLoaded", () => {
     champsFamille.forEach(champ => {
         const champInput = document.querySelector(`[name='${champ}']`);
@@ -193,6 +194,7 @@ form.addEventListener("submit", function(e) {
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
 
+    // Stocker les champs partagés pour réutilisation
     champsFamille.forEach(champ => {
         coordonneesPartagees[champ] = data[champ] || "";
     });
@@ -206,10 +208,11 @@ form.addEventListener("submit", function(e) {
             form.style.display = "none";
             confirmationMessage.style.display = "block";
 
+            // Créer bouton Ajouter un membre si absent
             if (!document.getElementById("btn-add-member-simple")) {
                 const btn = document.createElement("button");
                 btn.id = "btn-add-member-simple";
-                btn.className = "btn btn-outline-success mt-3";
+                btn.className = "btn btn-outline-success mt-3 me-2";
                 btn.textContent = "Ajouter un autre membre de la même famille";
                 btn.onclick = () => {
                     confirmationMessage.style.display = "none";
@@ -234,6 +237,7 @@ form.addEventListener("submit", function(e) {
     });
 });
 
+// Bouton classique "Nouvelle inscription"
 const btnNewInscription = document.getElementById("btn-new-inscription");
 btnNewInscription.addEventListener("click", () => {
     confirmationMessage.style.display = "none";
