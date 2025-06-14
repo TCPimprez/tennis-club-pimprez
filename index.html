@@ -264,28 +264,25 @@
 <script src="admin_secure.js"></script>
 
 <script>
-// URL de ton script Google Apps Script (déployé en mode "Application web")
-const SCRIPT_URL = "https://script.google.com/macros/s/1tEER5oczsRm1-xUOnhOba_7pnxQPTg_hYsfj5Vkrd7I/exec";
+// 🎯 Version BASIN.IO – Pas besoin de Google Scripts
+// Formulaire configuré avec ton endpoint personnel
+const BASIN_URL = "https://usebasin.com/f/28ad0c57c7ea";
 
-// Cacher le message de confirmation au chargement
 const confirmationMessage = document.getElementById("confirmation-message");
 confirmationMessage.style.display = "none";
 
-// Gestion de l'envoi du formulaire principal
 const form = document.getElementById("inscriptionForm");
 form.addEventListener("submit", function(e) {
     e.preventDefault();
 
     const formData = new FormData(form);
-    const data = Object.fromEntries(formData.entries());
 
-    fetch(SCRIPT_URL, {
+    fetch(BASIN_URL, {
         method: "POST",
-        body: JSON.stringify(data),
+        body: formData,
     })
-    .then(response => response.json())
-    .then(result => {
-        if (result.result === "success") {
+    .then(response => {
+        if (response.ok) {
             form.style.display = "none";
             confirmationMessage.style.display = "block";
         } else {
@@ -293,12 +290,11 @@ form.addEventListener("submit", function(e) {
         }
     })
     .catch(error => {
-        console.error("Erreur lors de l'envoi:", error);
+        console.error("Erreur réseau:", error);
         alert("Une erreur s'est produite. Veuillez réessayer plus tard.");
     });
 });
 
-// Réinitialisation du formulaire pour nouvelle inscription
 const btnNewInscription = document.getElementById("btn-new-inscription");
 btnNewInscription.addEventListener("click", () => {
     confirmationMessage.style.display = "none";
